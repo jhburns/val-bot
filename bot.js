@@ -36,11 +36,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
         switch(cmd) {
             // !ping
-            case 'ping':
-                bot.sendMessage({ to: channelID, message: 'Pong!' });
+            case 'painting':
+                bot.sendMessage({ to: channelID, message: 'Busy Painting! ᶠʳᵉᵉ ᵐᵉᵉ\n' });
             break;
-            default:
-                bot.sendMessage({ to: channelID, message: 'Unknown command.' });
         }
+    } else if (message.indexOf("and") >= 4 && message.indexOf("and") <= message.length - 7 && message.length <= 30 && message.substring(0,1) != '`') {
+        bot.sendMessage({ to: channelID, message: '```' + message + ' and PAINTING!```\n'});
     }
-})
+});

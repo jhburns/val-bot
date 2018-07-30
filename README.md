@@ -1,7 +1,13 @@
-![discord](https://discordapp.com/assets/dd4dbc0016779df1378e7812eabaa04d.png)
+# Valerie Bot
 
-# discord-greeter-bot
-My greeter bot for Discord
+# About
+
+Adds 'and PAINTING' to statements of two things separated with 'and' on the Fantasy Strike Discord. 
+
+Add :: https://discordapp.com/oauth2/authorize?&client_id=473280648782675978&scope=bot&permissions=2048
+
+Type `!painting` to see if it is up
+
 
 # Prerequisites
 
