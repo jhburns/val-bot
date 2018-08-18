@@ -37,7 +37,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         switch(cmd) {
             // !ping
             case 'painting':
-                bot.sendMessage({ to: channelID, message: 'Busy Painting! ᶠʳᵉᵉ ᵐᵉᵉ\n' });
+                bot.sendMessage({ to: channelID, message: 'Busy Painting! ᶠʳᵉᵉ ᵐᵉᵉ' });
                 break;
             case 'dink':
                 bot.sendMessage({ to: channelID, message: '*Get dinked on* https://i.imgur.com/977QXU5.gif' });
