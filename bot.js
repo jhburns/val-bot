@@ -38,6 +38,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             // !ping
             case 'painting':
                 bot.sendMessage({ to: channelID, message: 'Busy Painting! ᶠʳᵉᵉ ᵐᵉᵉ\n' });
+            case 'dink':
+                bot.sendMessage({ to: channelID, message: 'https://imgur.com/Au2MScA.gif' })
             break;
         }
     } else if (message.indexOf("and") >= 4 && message.indexOf("and") <= message.length - 7 && message.length <= 30 && message.substring(0,1) != '`') {
