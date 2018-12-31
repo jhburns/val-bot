@@ -72,8 +72,8 @@ const Discord = require('discord.js');
 //Private repo may not be loaded
 
 var fs = require('fs');
-if (fs.existsSync('./node_modules/api-keys/auth1.json')) {
-    var auth = require('./node_modules/api-keys/auth1.json');
+if (fs.existsSync('./node_modules/api-keys/auth.json')) {
+    var auth = require('./node_modules/api-keys/auth.json').token;
 } else {
     require('dotenv').config();
     var auth = process.env.TOKEN;
