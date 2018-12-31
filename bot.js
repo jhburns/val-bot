@@ -106,7 +106,6 @@ bot.on('ready', () => {
                 messages.array().forEach( function(element) {
                         quotes_text.unshift(element.content);
                 });
-                console.log(quotes_text);
             })
             .catch(function (error) {
                 logger.error("Quote messages not loaded");

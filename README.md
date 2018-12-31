@@ -24,3 +24,4 @@ For a tutorial on how to set up this bot of one similar see DOCS.md
 Simply run the command `npm start`
 
 ![val wow wow](profile.jpg)
+ 
