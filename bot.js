@@ -100,12 +100,13 @@ bot.on('ready', () => {
     const quotes_channel = bot.channels.find('name', "quotes");
 
     if (quotes_channel != null) {
-        const quotes = quotes_channel.fetchMessages()
+        quotes_channel.fetchMessages({ limit: 100 })
             .then(function (messages) {
                 logger.info("Messages loaded");
                 messages.array().forEach( function(element) {
-                        quotes_text.push(element.content);
+                        quotes_text.unshift(element.content);
                 });
+                console.log(quotes_text);
             })
             .catch(function (error) {
                 logger.error("Quote messages not loaded");
@@ -177,6 +178,13 @@ new Command(
 "says a random quote from the quotes channel",
 function (message) {
     message.channel.send("```" + quotes_text[Math.floor(Math.random() * quotes_text.length)] + "```");
+});
+
+new Command(
+"first",
+"says the most recently posted quote from the quotes channel",
+function (message) {
+    message.channel.send("```" + quotes_text[quotes_text.length - 1] + "```");
 });
 
 var imaging = new Command(
