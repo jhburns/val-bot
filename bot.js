@@ -112,17 +112,21 @@ bot.on('ready', () => {
         all_messages: the array to save each message to
 */
 function getAllMessages(channel, all_messages) {
-    let limit = 30;
+    let limit = 50;
     const getPromise = value => getMessageBlock(channel, limit, value);
 
     const loop = async value => {
         //Uses a do while loop because first id is unknown
         do  {
-            // waits for promise to be complete
-            message_block = await getPromise(value);
+            // waits for promise to be complete, so the messages can be chained together
+            try {
+                message_block = await getPromise(value);
+            } catch(err) {
+                logger.error(err);
+            }
 
             //converts returned object to array
-            var message_array = message_block.array();
+            const message_array = message_block.array();
             var count_messages = message_array.length;
 
             //Add each message to storage array
@@ -339,6 +343,8 @@ new Command(
 function (message) {
     message.channel.send("If you use #quotes as a place for moral guidance you ");
 });
+
+
 
 function getUptime() {
     var up = process.uptime();
