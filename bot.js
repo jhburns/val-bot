@@ -98,29 +98,85 @@ var quotes_text = [];
 // Second on ready is to get quotes text async
 bot.on('ready', () => {
     const quotes_channel = bot.channels.find('name', "quotes");
+    const fs = require('fs-extra');
 
     if (quotes_channel != null) {
-        quotes_channel.fetchMessages({ limit: 100 })
-            .then(function (messages) {
-                logger.info("Messages loaded");
-                messages.array().forEach( function(element) {
-                        quotes_text.unshift(element.content);
-                });
-            })
-            .catch(function (error) {
-                logger.error("Quote messages not loaded");
-                logger.error(error);
-            });
+        getAllMessages(quotes_channel, quotes_text);
     } else {
         logger.info("Not quotes channel found");
     }
+
 });
+
+/*  getAllMessages
+        channel: channel object that we want messages from
+        all_messages: the array to save each message to
+*/
+function getAllMessages(channel, all_messages) {
+    let limit = 30;
+    const getPromise = value => getMessageBlock(channel, limit, value);
+
+    const loop = async value => {
+        //Uses a do while loop because first id is unknown
+        do  {
+            // waits for promise to be complete
+            message_block = await getPromise(value);
+
+            //converts returned object to array
+            var message_array = message_block.array();
+            var count_messages = message_array.length;
+
+            //Add each message to storage array
+            message_array.forEach(function (element) {
+                all_messages.unshift(element.content);
+            });
+
+            // Need to check if the entry is empty or not, having zero objects returned results in 'undefined' crash
+            if (message_array[message_array.length - 1] !== undefined) {
+                value = message_array[message_array.length - 1].id;
+            }
+        //If the amount of messages received is ever less than requested, we can assume that we're done
+        } while (count_messages >= limit);
+
+    };
+
+    //Starts the loop with a null value so the id can be ignored in the getMessageBlock() function
+    loop(null).then(function() {
+        logger.info("All quotes loaded!");
+    }).catch(function (err) {
+       logger.error(err);
+    });
+}
+
+/*
+    getMessageBlock
+        channel: channel object that we want messages from
+        limit: positive int, with a max of 100
+        start_before: can be null (to get start of messages) or id of message from where to start getting messages from
+        return: promise to get messages block
+ */
+function getMessageBlock(channel, limit, start_before) {
+    let options;
+
+    if (start_before != null) {
+        options = {
+            limit: limit,
+            before: start_before
+        }
+    } else {
+        options = {
+            limit: limit
+        }
+    }
+
+    //Get a promise to receive messages from discord api
+    return channel.fetchMessages(options);
+}
+
 
 /*
  Commands block, they do not need to be declared as an actual var
  */
-
-
 
 bot.on('message', async message => {
     var text = message.content;
@@ -276,6 +332,13 @@ new Command(
 "gets how long the val has been painting for",
 function (message) {
     message.channel.send('I have been painting for about ' + getUptime());
+});
+
+new Command(
+"SUCC",
+"gets how long the val has been painting for",
+function (message) {
+    message.channel.send("If you use #quotes as a place for moral guidance you ");
 });
 
 function getUptime() {
