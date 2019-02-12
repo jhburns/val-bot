@@ -97,7 +97,7 @@ var quotes_text = [];
 
 // Second on ready is to get quotes text async
 bot.on('ready', () => {
-    const quotes_channel = bot.channels.find('name', "quotes");
+    const quotes_channel = bot.channels.find(val => val.name === 'quotes');
 
     if (quotes_channel != null) {
         getAllMessages(quotes_channel, quotes_text);
