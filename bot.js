@@ -65,7 +65,7 @@ class Command {
 Command.init();
 
 /*
- Main Discord BLock
+ Main Discord Block
  */
 const Discord = require('discord.js');
 
@@ -125,7 +125,7 @@ function getAllMessages(channel, all_messages) {
                 logger.error(err);
             }
 
-            //converts returned object to array
+            //converts retrieved object to array
             const message_array = message_block.array();
             var count_messages = message_array.length;
 
@@ -156,7 +156,7 @@ function getAllMessages(channel, all_messages) {
         channel: channel object that we want messages from
         limit: positive int, with a max of 100
         start_before: can be null (to get start of messages) or id of message from where to start getting messages from
-        return: promise to get messages block
+        return: promise to get a block of messages
  */
 function getMessageBlock(channel, limit, start_before) {
     let options;
