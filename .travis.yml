@@ -9,6 +9,7 @@ cache:
 
 before_install:
   - echo $GitHubPrivateKey > private_key.rsa
+  - ssh-add private_key.rsa
 
 install:
   - npm i
