@@ -1,11 +1,11 @@
-const config = require('./node_modules/api-keys/sync-config.json');
+const config = require('./node_modules/api-keys/glitch-config.json');
 const colors = require('colors');
 const { exec } = require('child_process');
 const args = require('args');
 
 args
     .option("debug", "Have the glitch-sync command debug")
-    .option("command_print",    "Outputs the commands being run. " +
+    .option("printcmd",    "Outputs the commands being run. " +
                                 "Warning: your api keys may be exposed if this flag is being used in a public area.");
 const flags = args.parse(process.argv);
 
@@ -20,7 +20,8 @@ if (flags.debug) {
 }
 command += "./node_modules/.bin/sync-glitch";
 
-if (flags.command_print) {
+
+if (flags.printcmd) {
     console.log(command.dim);
 }
 
@@ -28,10 +29,10 @@ exec(command, (err, stdout, stderr) => {
     if (err) {
         console.log("Error: could not run command, make sure that sync-config is correct".red);
 
-        if (flags.command_print) {
+        if (flags.printcmd) {
             console.log("Error message: ".red + err.message);
         } else {
-            console.log("Error message not printed to hide security keys, rerun locally with 'command_print = true' to see full error");
+            console.log("Error message not printed to hide security keys, rerun locally with --command_print to see full error");
         }
         return;
     }
