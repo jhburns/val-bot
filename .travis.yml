@@ -8,11 +8,12 @@ cache:
   - node_modules
 
 before_install:
+  - eval $(ssh-agent -s)
   - echo $GitHubPrivateKey > private_key.rsa
   - ssh-add private_key.rsa
 
 install:
   - npm i
- 
+
 script:
   - npm run safe-sync
