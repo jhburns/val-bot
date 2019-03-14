@@ -7,4 +7,4 @@ install:
 - npm i
 
 script:
-- return 0 && npm run sync
+- return 0 && npm run safe-sync
