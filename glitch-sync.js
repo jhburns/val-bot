@@ -1,4 +1,4 @@
-const config = require('./node_modules/api-keys/glitch-config.json');
+const config = require('./node_modules/api-keys/sync-config.json');
 const colors = require('colors');
 const { exec } = require('child_process');
 const args = require('args');
