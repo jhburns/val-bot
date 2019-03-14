@@ -20,6 +20,7 @@
   "scripts": {
     "start": "node bot.js",
     "sync": "node glitch-sync.js -d -p",
+    "safe-sync": "node glitch-sync.js -d",
     "update": "git push && npm run sync"
   },
   "devDependencies": {
