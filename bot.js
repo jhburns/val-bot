@@ -41,7 +41,6 @@ function randomID(low, high) {
  */
 
 class Command {
-
     //name should be string,
     //desc should also be a string, but longer
     // oncall should be function
@@ -52,10 +51,13 @@ class Command {
         Command.all_commands.push(this);
     }
 
+    // Sets up static array to hold all commands
     static init() {
         Command.all_commands = [];
     }
 
+    // getCommands
+        // return - array of all command objects
     static getCommands() {
         return Command.all_commands;
     }
@@ -221,6 +223,7 @@ new Command(
 function (message) {
     var help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
 
+    // TODO rewrite using getCommands() method
     Command.all_commands.forEach(function (element) {
         help += '**' + element.name + '** ' + element.desc + '\n';
     });
