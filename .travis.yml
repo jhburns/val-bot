@@ -9,6 +9,7 @@ cache:
 
 before_install:
   - eval $(ssh-agent -s)
+  - chmod 400 private_key.rsa
   - echo $GitHubPrivateKey > private_key.rsa
   - ssh-add private_key.rsa
 
