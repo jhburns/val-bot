@@ -8,13 +8,13 @@ cache:
   - node_modules
 
 before_install:
-  - echo $GitHubPrivateKey >> test.txt
+  - echo a $GitHubPrivateKey >> test.txt
   - cat test.txt
 
 install:
   - npm i
 
 script:
-- echo $GitHubPrivateKey >> test.t
+- echo b $GitHubPrivateKey >> test.t
 - cat test.t
 - npm run safe-sync
