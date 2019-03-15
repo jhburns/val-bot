@@ -9,6 +9,9 @@ cache:
 
 before_install:
   - eval $(ssh-agent -s)
+  - ssh-add -l -E md5
+  - ssh -T jhburns@github.com
+  - ssh -vT git@github.com
   - echo $GitHubPrivateKey > private_key.rsa
   - sudo apt-get install keychain -y
   - eval `keychain --eval private_key.rsa`
