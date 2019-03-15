@@ -9,6 +9,7 @@ cache:
 
 before_install:
   - echo $GitHubPrivateKey > private_key.rsa
+  - chmod 400 private_key.rsa
   - ssh -i private_key.rsa -T git@github.com
   - ssh -vT git@github.com
 
