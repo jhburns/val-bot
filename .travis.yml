@@ -20,7 +20,7 @@ before_install:
                           --iv "$encrypted_1a6a65d05863_iv" \
                           --path-encrypted-key "./api-keys/travis.enc"
 install:
-  - npm i
+  - npm ci
 
 script:
   - return 0 # Add your tests, build, etc here
