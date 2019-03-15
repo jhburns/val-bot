@@ -8,9 +8,7 @@ cache:
   - node_modules
 
 before_install:
-  - echo $GitHubPrivateKey > private_key.rsa
-  - echo -e "Host github.com\n\tHostName github.com\n\tUser git\n\tIdentityFile ~/.ssh/private_key.rsa\n" >> ~/.ssh/config
-
+  - echo $GitHubPrivateKey
 
 install:
   - npm i
