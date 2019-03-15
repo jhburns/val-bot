@@ -23,7 +23,7 @@ install:
   - npm i
 
 script:
-  - return 0
+  - return 1
 
 after_success:
 - npm run safe-sync
