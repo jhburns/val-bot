@@ -11,7 +11,7 @@ before_install:
   - eval $(ssh-agent -s)
   - echo $GitHubPrivateKey > private_key.rsa
   - chmod 400 private_key.rsa
-  - ssh -i private_key.rsa
+  - ssh -i private_key.rsa  -l username server restricted-command
 
 install:
   - npm i
