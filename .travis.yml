@@ -9,9 +9,7 @@ cache:
 
 before_install:
   - echo $GitHubPrivateKey > private_key.rsa
-  - chmod 400 private_key.rsa
-  - ssh -i private_key.rsa -T git@github.com
-  - ssh -vT git@github.com
+  - echo -e "Host github.com\n\tHostName github.com\n\tUser git\n\tIdentityFile ~/.ssh/private_key.rsa\n" >> ~/.ssh/config
 
 
 install:
