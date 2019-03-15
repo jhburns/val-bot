@@ -11,7 +11,7 @@ before_install:
   - eval $(ssh-agent -s)
   - echo $GitHubPrivateKey > private_key.rsa
   - chmod 400 private_key.rsa
-  - ssh-add private_key.rsa
+  - ssh -i private_key.rsa
 
 install:
   - npm i
