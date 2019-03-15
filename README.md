@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jhburns/val-bot.svg?branch=master)](https://travis-ci.org/jhburns/val-bot)
+
 # Valerie Bot
 A simple but powerful discord bot
 

@@ -340,15 +340,6 @@ function (message) {
     message.channel.send('I have been painting for about ' + getUptime());
 });
 
-new Command(
-"SUCC",
-"gets how long the val has been painting for",
-function (message) {
-    message.channel.send("If you use #quotes as a place for moral guidance you ");
-});
-
-
-
 function getUptime() {
     var up = process.uptime();
     var units = 'seconds';
