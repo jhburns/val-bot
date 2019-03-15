@@ -10,9 +10,9 @@ cache:
 before_install:
   - eval $(ssh-agent -s)
   - echo $GitHubPrivateKey > private_key.rsa
-  - chmod 400 private_key.rsa
-  - ssh-keygen -f private_key.rsa
-
+  - apt-get install keychain
+  - eval `keychain --eval private_key.rsa`
+  
 install:
   - npm i
 
