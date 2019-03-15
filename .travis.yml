@@ -7,14 +7,22 @@ cache:
   directories:
   - node_modules
 
-before_install:
-  - echo a $GitHubPrivateKey >> test.txt
-  - cat test.txt
+env:
+  global:
+    - secure: "NuSvX8RH8IwZQoMH8exZ3xG+Y6B4N9mXERW5IC5xWKR01zkF0LzRAKoLWK1dOxiHUaSGJPEvh7o6M9jC6JzM9w93hApHHsPd1eMrA9K5rWiDQcnEZcEja3VnewbGAw+QCkoiScZ/VH8JreXoKsmjW+oL0kNS2IpQCfJBh7vR9vErvq+3xeT6CHAvVDo70vUwoWqWVuQ9OqwHQFNcfNxgZn42wTb7Dn8ODNGF62wHsTL61DsvO1M0I1noJTEjs7WYMdeHbXir2Ovy4nkK5ZHOefTO1u/0dgzokJO/KicG1AUiNDEoiQPM4MN2ZbJO9drqlJVdesgU/ABnFINQ2uMK2tH2slnFCvugKDPLfZ7/h/XipOzIbAdtGzYxhI6lnlkpNV5xBK/Kc9AkCzuHhrrmcq6BV6awwyd9IXE5/iYhgGyv1V7f0jZuw06p+RHdAR4hW3a4H/W1DtlksfY8U1MSH/Y1h1zWa7p5CosvBseByqRccjfJbSvENaDD/t/NyBXz23QNKODwJVQwSr/bvROImMPSg8lf7tNxuCzxFxtpDXSSRTL6ORr4laPo5SGfYF5xpe5+xqFvnPPG/IFJDMRDXq4Osyf5oWcbrCpjKFSNMqMydsdBX1iIod9LOuJp0aaDkGSPTqdYiijh2X6DxIqz5GzlKN+VfM1jWar/C2LFEHE="
 
+
+before_install:
+- |
+
+  $(npm bin)/set-up-ssh --key "$encrypted_1a6a65d05863_key" \
+                        --iv "$encrypted_1a6a65d05863_iv" \
+                        --path-encrypted-key ".api-keys/travis.enc"
 install:
   - npm i
 
 script:
-- echo b $GitHubPrivateKey >> test.t
-- cat test.t
+  - return 0
+
+after_success:
 - npm run safe-sync
