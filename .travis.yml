@@ -13,7 +13,7 @@ env:
 
 
 before_install:
-  - npm install @alrra/travis-scripts
+  - npm install @alrra/travis-scripts@3.0.1
   - |
 
     $(npm bin)/set-up-ssh --key "$encrypted_1a6a65d05863_key" \
