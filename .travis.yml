@@ -26,4 +26,4 @@ script:
   - return 0 # Add your tests, build, etc here
 
 after_success:
-- npm run safe-sync
+  - npm run safe-sync
