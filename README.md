@@ -25,5 +25,5 @@ For a tutorial on how to set up this bot of one similar see DOCS.md
 
 Simply run the command `npm start`
 
-![val wow wow](profile.jpg)
+<img src="https://raw.githubusercontent.com/jhburns/val-bot/master/profile.jpg">
  
