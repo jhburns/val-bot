@@ -25,5 +25,5 @@ For a tutorial on how to set up this bot of one similar see DOCS.md
 
 Simply run the command `npm start`
 
-<img style="max-width: 150px; display: block; height: auto" src="https://raw.githubusercontent.com/jhburns/val-bot/master/profile.jpg">
+<img width="150" src="https://raw.githubusercontent.com/jhburns/val-bot/master/profile.jpg">
  
