@@ -357,7 +357,13 @@ function getUptime() {
         units = "days";
     }
 
-    return '**' + Math.floor(up) + " " + units + '**';
+    up = Math.floor(up);
+
+    if (up === 1) {
+        units = units.slice(0, -1);
+    }
+
+    return '**' + up + " " + units + '**';
 }
 
 /*
