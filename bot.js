@@ -1,40 +1,16 @@
 /*
  Sound set-up
  */
-var ffmpeg = require('ffmpeg');
-var googleTTS = require('google-tts-api');
-var download = require('download-file');
+let ffmpeg = require('ffmpeg');
+let googleTTS = require('google-tts-api');
+let download = require('download-file');
 
 /*
- Logging block, using winston
- Use logger.info("text"); for normal text and change .info to .error for error
+  Custom utilities
  */
-
-const winston = require('winston');
-
-const logger = winston.createLogger({
-    format:  winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-    ),
-    transports: [
-        new winston.transports.Console()
-    ]
-});
-
-/*
- Non Discord Helpers,
- They may be used by discord, but don't need it
- */
-
-function randomID(low, high) {
-    //seems dumb, but string zero is needed for padding output
-    var zero = '0';
-    var padding = zero.repeat(high.toString().length);
-    var num = Math.floor(Math.random() * (high - low) + low);
-
-    return (padding+num).slice(-padding.length);
-}
+const logger = require("./util/logger");
+const random = require("./util/randoms");
+const format = require("./util/formatter");
 
 /*
  Command class, to make adding new commands easier
@@ -71,23 +47,13 @@ Command.init();
  */
 const Discord = require('discord.js');
 
-//Private repo may not be loaded
-
-var fs = require('fs');
-if (fs.existsSync('./node_modules/api-keys/auth.json')) {
-    var auth = require('./node_modules/api-keys/auth.json').token;
-} else {
-    require('dotenv').config();
-    var auth = process.env.TOKEN;
-}
-
 const bot = new Discord.Client({});
 
 bot.on('ready', () => {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.user.username + ' - userID (' + bot.user.id + ')');
-    logger.info('Run Instance ID: ' + '(' + randomID(0, 999999) + ')' + ' Up in: ' + process.uptime() + 'sec');
+    logger.info('Run Instance ID: ' + '(' + random.ID(0, 999999) + ')' + ' Up in: ' + process.uptime() + 'sec');
 });
 
 bot.on('error', (message) => {
@@ -95,7 +61,7 @@ bot.on('error', (message) => {
 });
 
 //global so the on message function can use it
-var quotes_text = [];
+let quotes_text = [];
 
 // Second on ready is to get quotes text async
 bot.on('ready', () => {
@@ -180,24 +146,21 @@ function getMessageBlock(channel, limit, start_before) {
 
 
 /*
- Commands block, they do not need to be declared as an actual var
+ Commands block, they do not need to be declared as an actual let
  */
 
 bot.on('message', async message => {
-    var text = message.content;
+    let text = message.content;
 
     if (text.substring(0, 1) == '!') {
-        var args = text.substring(1).split(' ');
-        var cmd = args[0];
+        let args = text.substring(1).split(' ');
+        let cmd = args[0];
 
         Command.all_commands.find(function(element) {
             if (element.name === cmd) {
                 element.oncall(message);
             }
         });
-
-    } else if (text.indexOf("and") >= 4 && text.indexOf("and") <= text.length - 7 && text.length <= 30 && text.substring(0, 1) != '`') {
-        message.channel.send('```' + text + ' and PAINTING!```');
     }
 
     if (message.channel.name === 'quotes') {
@@ -207,7 +170,7 @@ bot.on('message', async message => {
 
 /*
  Command block, for all the ! commands
- Does not need to be set to a variable
+ Does not need to be set to a letiable
  */
 
 new Command(
@@ -221,7 +184,7 @@ new Command(
 "halp",
 "gives information on commands",
 function (message) {
-    var help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
+    let help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
 
     // TODO rewrite using getCommands() method
     Command.all_commands.forEach(function (element) {
@@ -238,7 +201,7 @@ new Command(
 "quote",
 "says a random quote from the quotes channel",
 function (message) {
-    message.channel.send("```" + quotes_text[Math.floor(Math.random() * quotes_text.length)] + "```");
+    message.channel.send("```" + quotes_text[ random.quoteIndex(quotes_text.length) ] + "```");
 });
 
 new Command(
@@ -248,15 +211,15 @@ function (message) {
     message.channel.send("```" + quotes_text[quotes_text.length - 1] + "```");
 });
 
-var imaging = new Command(
+let imaging = new Command(
 "dink",
 "posts the best gif in the world",
 function (message) {
     message.channel.send({files: ["./img/dink.gif"]});
 });
 
-var on = false
-var voicing = new Command(
+let on = false;
+let voicing = new Command(
 "dink-on",
 "a command to lay ruin to your enemies",
 function (message) {
@@ -267,7 +230,7 @@ function (message) {
     on = true;
 
     //If not in a call, prompt
-    var voiceChannel = message.member.voiceChannel;
+    let voiceChannel = message.member.voiceChannel;
     if (voiceChannel === undefined) {
         message.channel.send("Please enter a channel to hear dis");
         return;
@@ -275,12 +238,12 @@ function (message) {
     const broadcast = bot.createVoiceBroadcast();
 
     voiceChannel.join().then(connection =>{
-        var to_say = "get dinked on ";
+        let to_say = "get dinked on ";
         to_say += message.content.substring(message.content.indexOf(' '), 150);
 
         googleTTS(to_say, 'en', 1)
             .then(function (url) {
-                var options = {
+                let options = {
                     directory: "./sounds/",
                     filename: "temptalk.mp3"
                 };
@@ -291,10 +254,10 @@ function (message) {
                     }
 
                     broadcast.playFile('sounds/diiiink.mp3');
-                    var dispatcher = connection.playBroadcast(broadcast, {volume: 0.4});
+                    let dispatcher = connection.playBroadcast(broadcast, {volume: 0.4});
 
                     dispatcher.on('start', function () {
-                        var firstPromise = new Promise(function (resolve, reject) {
+                        let firstPromise = new Promise(function (resolve, reject) {
 
                             setTimeout(() => {
                                 broadcast.playFile('sounds/temptalk.mp3');
@@ -302,7 +265,7 @@ function (message) {
                             }, 3000);
                         });
 
-                        var secondPromise = new Promise(function (resolve, reject) {
+                        let secondPromise = new Promise(function (resolve, reject) {
                             setTimeout(() => {
                                 voiceChannel.leave();
                                 on = false;
@@ -325,10 +288,10 @@ new Command(
 "dink-all",
 "posts the picture and says the thing in voice chat",
 function (message) {
-    var firstPromise = new Promise(function (resolve, reject) {
+    let firstPromise = new Promise(function (resolve, reject) {
         voicing.oncall(message);
     });
-    var firstPromise = new Promise(function (resolve, reject) {
+    let secondPromise = new Promise(function (resolve, reject) {
         imaging.oncall(message);
     });
 });
@@ -337,47 +300,13 @@ new Command(
 "upp",
 "gets how long the val has been painting for",
 function (message) {
-    message.channel.send('I have been painting for about ' + getUptime());
+    message.channel.send('I have been painting for about ' + format.getUptime());
 });
 
-function getUptime() {
-    var up = process.uptime();
-    var units = 'seconds';
+// Needs to be after rest of setup
+let auth = require("./setup/authorize");
+let login = auth.connect(bot);
+login();
 
-    if (up > 60) {
-        up /= 60;
-        units = "minutes";
-    }
-    if (up > 60) {
-        up /= 60;
-        units = "hours";
-    }
-    if (up > 24 && units == "hours") {
-        up /= 24;
-        units = "days";
-    }
-
-    up = Math.floor(up);
-
-    if (up === 1) {
-        units = units.slice(0, -1);
-    }
-
-    return '**' + up + " " + units + '**';
-}
-
-/*
- Needs to ping itself to no get shut down
- */
-const http = require('http');
-const express = require('express');
-const app = express();
-
-app.listen(8080);
-setInterval(() => {
-    http.get(`http://hyper-date.glitch.me/`);
-    // Interval needs to be less than 5min
-}, 180000);
-
-// Needs to be last so other methods are pre-loaded
-bot.login(auth);
+var fork = require('child_process').fork;
+var ping = fork("./webserver/pingself.js", { detached: true });
