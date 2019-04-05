@@ -309,4 +309,4 @@ let login = auth.connect(bot);
 login();
 
 var fork = require('child_process').fork;
-var ping = fork("./webserver/pingself.js", { detached: true });
+var ping = fork("./webserver/pingself.js");
