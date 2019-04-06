@@ -25,7 +25,7 @@ let dink_on = {
         }
         const broadcast = bot.createVoiceBroadcast();
 
-        voiceChannel.join().then( () => getSound(voiceChannel, broadcast, message) )
+        voiceChannel.join().then(connection => getSound(voiceChannel, broadcast, message, connection) )
             .catch(function (err) {
                 logger.error(err)
             });
@@ -41,12 +41,12 @@ let dink_on = {
     }
 };
 
-function getSound(voiceChannel, broadcast, message) {
+function getSound(voiceChannel, broadcast, message, connection) {
     let to_say = "get dinked on ";
     to_say += message.content.substring(message.content.indexOf(' '), 150);
 
     googleTTS(to_say, 'en', 1)
-        .then( () => downloadFile(url, voiceChannel, broadcast) )
+        .then( (url) => downloadFile(url, voiceChannel, broadcast, connection) )
         .catch(function (err) {
             logger.error(err);
         });
@@ -54,7 +54,7 @@ function getSound(voiceChannel, broadcast, message) {
 
 
 
-function downloadFile(url, voiceChannel, broadcast) {
+function downloadFile(url, voiceChannel, broadcast, connection) {
     let options = {
         directory: "./sounds/",
         filename: "temptalk.mp3"
@@ -66,13 +66,14 @@ function downloadFile(url, voiceChannel, broadcast) {
         }
 
         broadcast.playFile('sounds/diiiink.mp3');
+
         let dispatcher = connection.playBroadcast(broadcast, {volume: 0.4});
 
-        dispatcher.on('start', () => playFile(voiceChannel, broadcast));
+        dispatcher.on('start', () => playFile(voiceChannel, broadcast, connection));
     });
 }
 
-function playFile(voiceChannel, broadcast) {
+function playFile(voiceChannel, broadcast, connection) {
     new Promise(function () {
         setTimeout(() => {
             broadcast.playFile('sounds/temptalk.mp3');
