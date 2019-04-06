@@ -30,6 +30,13 @@ let dink_on = {
             .catch(function (err) {
                 logger.error(err)
             });
+        
+        new Promise(function () {
+            setTimeout(() => {
+                voiceChannel.leave();
+                on = false;
+            }, 7000);
+        });
     }
 };
 
@@ -70,16 +77,7 @@ function playFile(voiceChannel, broadcast) {
             broadcast.playFile('sounds/temptalk.mp3');
             dispatcher = connection.playBroadcast(broadcast, {volume: 0.5});
         }, 3000);
-        });
-
-    new Promise(function () {
-        setTimeout(() => {
-            voiceChannel.leave();
-            on = false;
-        }, 7000);
-    });
-
+        }).err((err) => logger.err(err));
 }
-
 
 module.exports = dink_on;
