@@ -75,7 +75,7 @@ function getAllMessages(channel, all_messages) {
             if (message_array[message_array.length - 1] !== undefined) {
                 value = message_array[message_array.length - 1].id;
             }
-        //If the amount of messages received is ever less than requested, we can assume that we're done
+            //If the amount of messages received is ever less than requested, we can assume that we're done
         } while (count_messages >= limit);
 
     };
@@ -84,7 +84,7 @@ function getAllMessages(channel, all_messages) {
     loop(null).then(function() {
         logger.info("All quotes loaded!");
     }).catch(function (err) {
-       logger.error(err);
+        logger.error(err);
     });
 }
 
@@ -127,7 +127,7 @@ bot.on('message', async message => {
 
         Command.all_commands.find(function(element) {
             if (element.name === cmd) {
-                element.oncall(message, bot);
+                element.oncall(message, bot, quotes_text);
             }
         });
     }
