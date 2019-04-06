@@ -41,7 +41,7 @@ let dink_on = {
     }
 };
 
-function getSound(voiceChannel, broadcast) {
+function getSound(voiceChannel, broadcast, message) {
     let to_say = "get dinked on ";
     to_say += message.content.substring(message.content.indexOf(' '), 150);
 
