@@ -16,7 +16,6 @@ let dink_on = {
             message.channel.send("Please wait your turn, dink is busy right now");
             return;
         }
-        on = true;
 
         //If not in a call, prompt
         let voiceChannel = message.member.voiceChannel;
@@ -37,6 +36,8 @@ let dink_on = {
                 on = false;
             }, 10500);
         });
+
+        on = true;
     }
 };
 
