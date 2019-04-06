@@ -151,7 +151,7 @@ login();
 
 /*
   Non-Bot process that can be in a child process
- */
+
 var fork = require('child_process').fork;
 
 var ping = fork("./webserver/pingself.js");
@@ -161,3 +161,10 @@ process.on('exit', function () {
     ping.kill();
     health.kill();
 });
+*/
+const express = require('express');
+const app = express();
+
+app.get('/health', (req, res) => res.send("Up"));
+
+app.listen(80, () => logger.info("Health endpoint started"));
