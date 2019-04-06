@@ -15,7 +15,7 @@
     "express": "^4.16.3",
     "google-tts-api": "0.0.2",
     "uws": "^9.14.0 ",
-    "winston": "^3.0.0"
+    "winston": "^3.2.1"
   },
   "scripts": {
     "start": "node bot.js",
@@ -25,8 +25,7 @@
   },
   "devDependencies": {
     "discord.js": "^11.4.2",
-    "ffmpeg": "0.0.4",
-    "libsodium-wrappers": "^0.7.3",
+    "libsodium-wrappers": "^0.7.4",
     "opusscript": "0.0.6",
     "sync-glitch-cli": "^2.0.1"
   },
