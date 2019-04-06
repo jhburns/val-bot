@@ -8,8 +8,8 @@ let pong = {
             .then((newMessage) => {
                 let end = Date.now();
                 newMessage.edit("🏓, this message took a " +
-                                "roundtrip of " + (end - start) + " ms, " +
-                                "and has a heartbeat of " + bot.ping + "ms.");
+                                "roundtrip of " + Math.floor(end - start) + " ms, " +
+                                "and has a heartbeat of " + Math.floor(bot.ping) + "ms.");
             });
     }
 };
