@@ -25,7 +25,7 @@ let dink_on = {
         }
         const broadcast = bot.createVoiceBroadcast();
 
-        voiceChannel.join().then( () => getSound(voiceChannel, broadcast) )
+        voiceChannel.join().then( () => getSound(voiceChannel, broadcast, message) )
             .catch(function (err) {
                 logger.error(err)
             });
