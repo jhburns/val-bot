@@ -155,7 +155,7 @@ login();
 var fork = require('child_process').fork;
 
 var ping = fork("./webserver/pingself.js");
-var health = fork("./webserver/endpoint.js");
+//var health = fork("./webserver/endpoint.js");
 
 process.on('exit', function () {
     ping.kill();
