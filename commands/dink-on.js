@@ -8,8 +8,6 @@ const logger = require("../util/logger");
 
 let on = false;
 
-// TODO: fix in production
-
 let dink_on = {
     name: "dink-on",
     desc: "a command to lay ruin to your enemies",

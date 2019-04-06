@@ -146,5 +146,5 @@ var fork = require('child_process').fork;
 var ping = fork("./webserver/pingself.js");
 
 process.on('exit', function () {
-    ping.kill()
+    ping.kill();
 });
