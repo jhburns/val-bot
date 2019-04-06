@@ -30,12 +30,12 @@ let dink_on = {
             .catch(function (err) {
                 logger.error(err)
             });
-        
+
         new Promise(function () {
             setTimeout(() => {
                 voiceChannel.leave();
                 on = false;
-            }, 7000);
+            }, 10500);
         });
     }
 };
