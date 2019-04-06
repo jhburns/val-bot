@@ -1,5 +1,4 @@
-let Command = require("../setup/command_class");
-
+const Command = require("../setup/command_class");
 
 let halp = {
     name: "halp",

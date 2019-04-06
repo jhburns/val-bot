@@ -32,6 +32,9 @@ Command.init();
 
 module.exports = Command;
 
+/*
+  Just in case something uncaught it thrown in a class
+ */
 process.on('uncaughtException', function (exception) {
     console.log(exception);
 });

@@ -20,6 +20,6 @@ app.listen(config.port);
 
 setInterval(() => {
     http.get(config.url);
-    // Interval needs to be less than 5min
 
+    // Interval needs to be less than 5min
 }, 1800);

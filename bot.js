@@ -7,6 +7,11 @@ const random = require("./util/randoms");
 let Command = require("./setup/command_class");
 const fs = require('fs');
 
+const args = require('args');
+args
+    .option("draft", "Only allow commands with the 'draft' flag set to true to function");
+const flags = args.parse(process.argv);
+
 /*
  Discord Client
  */
@@ -41,7 +46,7 @@ bot.on('ready', () => {
 
 fs.readdirSync("./commands").forEach(file => {
     const currentCmd = require("./commands/" + file);
-    new Command(currentCmd.name, currentCmd.desc, currentCmd.callback);
+    new Command(currentCmd.name, currentCmd.desc, currentCmd.callback, currentCmd.draft);
 });
 
 /*  getAllMessages
@@ -126,7 +131,8 @@ bot.on('message', async message => {
         let cmd = args[0];
 
         Command.all_commands.find(function(element) {
-            if (element.name === cmd) {
+            // XOR, ^, makes it so only drafts or non-drafts show, never both
+            if (element.name === cmd && (!element.draft ^ flags.draft)) {
                 element.oncall(message, bot, quotes_text);
             }
         });
@@ -142,8 +148,14 @@ let auth = require("./setup/authorize");
 let login = auth.connect(bot);
 login();
 
+
+/*
+  Non-Bot process that can be in a child process
+ */
 var fork = require('child_process').fork;
+
 var ping = fork("./webserver/pingself.js");
+var ping = fork("./webserver/endpoint.js");
 
 process.on('exit', function () {
     ping.kill();

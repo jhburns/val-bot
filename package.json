@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "node bot.js",
+    "draft": "node bot.js -d",
     "sync": "node glitch-sync.js -d -p",
     "safe-sync": "node glitch-sync.js -d",
     "update": "git push && npm run sync"

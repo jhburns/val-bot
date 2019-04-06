@@ -1,4 +1,5 @@
 {
   "port": 5384,
+  "health_port": 9090,
   "url": "http://cyclic-narwhal.glitch.me/"
 }
