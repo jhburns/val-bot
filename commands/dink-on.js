@@ -33,7 +33,7 @@ let dink_on = {
             googleTTS(to_say, 'en', 1)
                 .then(function (url) {
                     let options = {
-                        directory: "../sounds/",
+                        directory: "./sounds/",
                         filename: "temptalk.mp3"
                     };
 
@@ -46,7 +46,7 @@ let dink_on = {
                         let dispatcher = connection.playBroadcast(broadcast, {volume: 0.4});
 
                         dispatcher.on('start', function () {
-                            let firstPromise = new Promise(function (resolve, reject) {
+                            new Promise(function (resolve, reject) {
 
                                 setTimeout(() => {
                                     broadcast.playFile('sounds/temptalk.mp3');
@@ -54,7 +54,7 @@ let dink_on = {
                                 }, 3000);
                             });
 
-                            let secondPromise = new Promise(function (resolve, reject) {
+                            new Promise(function (resolve, reject) {
                                 setTimeout(() => {
                                     voiceChannel.leave();
                                     on = false;
@@ -73,5 +73,6 @@ let dink_on = {
         });
     }
 };
+
 
 module.exports = dink_on;
