@@ -88,6 +88,11 @@ function getAllMessages(channel, all_messages) {
     //Starts the loop with a null value so the id can be ignored in the getMessageBlock() function
     loop(null).then(function() {
         logger.info("All quotes loaded!");
+        fs.writeFile("data.json", JSON.stringify(quotes_text, undefined, 2), function (err) {
+            if (err) {
+                logger.error(err);
+            }
+        });
     }).catch(function (err) {
         logger.error(err);
     });
