@@ -5,13 +5,11 @@ A simple but powerful discord bot
 
 ## About
 
-Adds 'and PAINTING' to statements of two things separated with 'and' (hopefully) on the Fantasy Strike Discord. 
+Has multiple commands to enrich your discord server, see all with `!halp`
 
 Add :: https://discordapp.com/oauth2/authorize?&client_id=473280648782675978&scope=bot&permissions=3247104
 
-Type `!painting` to see if it is up
 
-Type `!halp` for a list of all commands
 
 ## Features
 This bot is a pretty in depth template with some great features:
