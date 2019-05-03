@@ -1,17 +1,15 @@
 [![Build Status](https://travis-ci.org/jhburns/val-bot.svg?branch=master)](https://travis-ci.org/jhburns/val-bot)
 
-# Valerie Bot
+# Valerie Bot 
 A simple but powerful discord bot
 
 ## About
 
-Adds 'and PAINTING' to statements of two things separated with 'and' (hopefully) on the Fantasy Strike Discord. 
+Has multiple commands to enrich your discord server, see all with `!halp`
 
 Add :: https://discordapp.com/oauth2/authorize?&client_id=473280648782675978&scope=bot&permissions=3247104
 
-Type `!painting` to see if it is up
 
-Type `!halp` for a list of all commands
 
 ## Features
 This bot is a pretty in depth template with some great features:
@@ -24,8 +22,6 @@ For a tutorial on how to set up this bot of one similar see DOCS.md
 ## Running Server
 
 Simply run the command `npm start`
-
-<img width="150" src="https://raw.githubusercontent.com/jhburns/val-bot/master/img/profile.jpg">
 
 > Hi, my name is val-bot!
  
