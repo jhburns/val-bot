@@ -58,7 +58,7 @@ fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
         all_messages: the array to save each message to
 */
 function getAllMessages(channel, all_messages) {
-    let limit = 10;
+    let limit = 50;
     const getPromise = value => getMessageBlock(channel, limit, value);
 
     const loop = async value => {
