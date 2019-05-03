@@ -6,11 +6,14 @@ const random = require("./util/randoms");
 
 let Command = require("./setup/command_class");
 const fs = require('fs');
+const path = require('path');
 
 const args = require('args');
 args
     .option("draft", "Only allow commands with the 'draft' flag set to true to function");
 const flags = args.parse(process.argv);
+
+
 
 /*
  Discord Client
@@ -44,17 +47,18 @@ bot.on('ready', () => {
 
 });
 
-fs.readdirSync("./commands").forEach(file => {
+fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
     const currentCmd = require("./commands/" + file);
     new Command(currentCmd.name, currentCmd.desc, currentCmd.callback, currentCmd.draft);
 });
+
 
 /*  getAllMessages
         channel: channel object that we want messages from
         all_messages: the array to save each message to
 */
 function getAllMessages(channel, all_messages) {
-    let limit = 50;
+    let limit = 10;
     const getPromise = value => getMessageBlock(channel, limit, value);
 
     const loop = async value => {
@@ -88,11 +92,9 @@ function getAllMessages(channel, all_messages) {
     //Starts the loop with a null value so the id can be ignored in the getMessageBlock() function
     loop(null).then(function() {
         logger.info("All quotes loaded!");
-        fs.writeFile("data.json", JSON.stringify(quotes_text, undefined, 2), function (err) {
-            if (err) {
-                logger.error(err);
-            }
-        });
+
+        let ready = require("./webserver/ready");
+        ready.is = true;
     }).catch(function (err) {
         logger.error(err);
     });
@@ -159,10 +161,13 @@ login();
 */
 var fork = require('child_process').fork;
 
-var ping = fork("./webserver/pingself.js");
-var health = fork("./webserver/endpoint.js");
+var ping = fork(path.join(__dirname, "webserver/pingself.js"));
 
 process.on('exit', function () {
     ping.kill();
-    health.kill();
 });
+
+
+var endpoints = require("./webserver/endpoints");
+endpoints();
+
