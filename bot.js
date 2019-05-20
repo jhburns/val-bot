@@ -61,9 +61,12 @@ function getAllMessages(channel, all_messages) {
     let limit = 50;
     const getPromise = value => getMessageBlock(channel, limit, value);
 
+    let count_messages;
     const loop = async value => {
         //Uses a do while loop because first id is unknown
         do  {
+            let message_block;
+
             // waits for promise to be complete, so the messages can be chained together
             try {
                 message_block = await getPromise(value);
@@ -73,7 +76,7 @@ function getAllMessages(channel, all_messages) {
 
             //converts retrieved object to array
             const message_array = message_block.array();
-            var count_messages = message_array.length;
+            count_messages = message_array.length;
 
             //Add each message to storage array
             message_array.forEach(function (element) {
