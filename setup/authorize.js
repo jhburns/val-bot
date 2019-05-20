@@ -2,21 +2,17 @@ let fs = require('fs');
 let logger = require("../util/logger");
 
 function getAuthToken(bot) {
-    if (fs.existsSync('./node_modules/api-keys/auth.json')) {
-        let auth = require('../node_modules/api-keys/auth.json').token;
+    let auth;
 
-        return function () {
-            bot.login(auth)
-        }
+    if (fs.existsSync('./node_modules/api-keys/auth.json')) {
+        auth = require('../node_modules/api-keys/auth.json').token;
     } else {
         require('dotenv').config();
-        let auth = process.env.TOKEN;
+        auth = process.env.TOKEN;
+    }
 
-        //Code has to repeated because the auth key is being closed,
-        //Having a separate function moves it out of scope
-        return function () {
-            bot.login(auth)
-        }
+    return function () {
+        bot.login(auth)
     }
 }
 

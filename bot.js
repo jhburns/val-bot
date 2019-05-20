@@ -127,7 +127,7 @@ function getMessageBlock(channel, limit, start_before) {
 
 
 /*
- Commands block, they do not need to be declared as an actual let
+ Commands block, how messages are handled
  */
 
 bot.on('message', async message => {
@@ -135,14 +135,24 @@ bot.on('message', async message => {
 
     if (text.substring(0, 1) == '!') {
         let args = text.substring(1).split(' ');
-        let cmd = args[0];
+        let cmd_name = args[0];
 
-        Command.all_commands.find(function(element) {
-            // XOR, ^, makes it so only drafts or non-drafts show, never both
-            if (element.name === cmd && (!element.draft ^ flags.draft)) {
-                element.oncall(message, bot, quotes_text);
-            }
+        let current_cmd = Command.all_commands.find(function(element) {
+            return element.name === cmd_name;
         });
+
+        // Ignore commands that don't exist/can't be found
+        if (current_cmd === undefined) {
+            return;
+        }
+
+        if (!current_cmd.draft ^ flags.draft) {
+            current_cmd.oncall(message, bot, quotes_text);
+        } else if (!flags.draft) {
+            logger.info('"!' + cmd_name + '"' + " command ignored due to running in production mode.");
+        } else if (flags.draft) {
+            logger.info('"!' + cmd_name + '"' + " command ignored due to running in draft mode.");
+        }
     }
 
     if (message.channel.name === 'quotes') {
@@ -159,15 +169,15 @@ login();
 /*
   Non-Bot process that can be in a child process
 */
-var fork = require('child_process').fork;
+let fork = require('child_process').fork;
 
-var ping = fork(path.join(__dirname, "webserver/pingself.js"));
+let ping = fork(path.join(__dirname, "webserver/pingself.js"));
 
 process.on('exit', function () {
     ping.kill();
 });
 
 
-var endpoints = require("./webserver/endpoints");
+let endpoints = require("./webserver/endpoints");
 endpoints();
 
