@@ -10,9 +10,6 @@ let halp = {
             help += '**' + element.name + '** ' + element.desc + '\n';
         });
 
-        if (help === "") {
-            logger.error("Message cannot be blank");
-        }
         message.channel.send(help + "");
     }
 };
