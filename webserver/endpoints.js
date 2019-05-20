@@ -24,7 +24,7 @@ module.exports = function () {
         }
     });
 
-    app.listen(config.endpoint_port, () => logger.info("Endpoints started"));
+    app.listen(config.endpoint_port, () => logger.info("Endpoints started on port: " + config.endpoint_port));
 
     return app;
 };

@@ -23,9 +23,9 @@ const bot = new Discord.Client({});
 
 bot.on('ready', () => {
     logger.info('Connected');
-    logger.info('Logged in as: ');
     logger.info(bot.user.username + ' - userID (' + bot.user.id + ')');
     logger.info('Run Instance ID: ' + '(' + random.ID(0, 999999) + ')' + ' Up in: ' + process.uptime() + 'sec');
+    logger.info('Running in: ' + (flags.draft ? 'draft' : 'production') + ' mode');
 });
 
 bot.on('error', (message) => {
@@ -91,7 +91,7 @@ function getAllMessages(channel, all_messages) {
 
     //Starts the loop with a null value so the id can be ignored in the getMessageBlock() function
     loop(null).then(function() {
-        logger.info("All quotes loaded!");
+        logger.info("All quotes loaded in: " + process.uptime() + "sec");
 
         let ready = require("./webserver/ready");
         ready.is = true;
@@ -133,7 +133,7 @@ function getMessageBlock(channel, limit, start_before) {
 bot.on('message', async message => {
     let text = message.content;
 
-    if (text.substring(0, 1) == '!') {
+    if (text.substring(0, 1) === '!') {
         let args = text.substring(1).split(' ');
         let cmd_name = args[0];
 

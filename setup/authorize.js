@@ -1,5 +1,4 @@
 let fs = require('fs');
-let logger = require("../util/logger");
 
 function getAuthToken(bot) {
     let auth;
