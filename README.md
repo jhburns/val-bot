@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/jhburns/val-bot.svg?branch=master)](https://travis-ci.org/jhburns/val-bot)
 
 # Valerie Bot 
-A simple but powerful discord bot
+A simple but fun discord bot.
 
 ## About
 
@@ -23,5 +23,11 @@ For a tutorial on how to set up this bot of one similar see DOCS.md
 
 Simply run the command `npm start`
 
-> Hi, my name is val-bot!
- 
+```
+info: Endpoints started on port: 3000
+info: Connected
+info: Valerie Bot - userID (473280648782675978)
+info: Run Instance ID: (706557) Up in: 1.254sec
+info: Running in: production mode
+info: All quotes loaded in: 3.082sec
+````
