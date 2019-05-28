@@ -17,6 +17,6 @@ function randomBoolean() {
 
 module.exports = {
     ID: leftPadRandomInt,
-    quoteIndex: randomRangeToMax,
+    intOfMax: randomRangeToMax,
     flip: randomBoolean
 };

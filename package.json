@@ -23,9 +23,12 @@
     "draft": "node bot.js -d",
     "sync": "node glitch-sync.js -d -p",
     "safe-sync": "node glitch-sync.js -d",
-    "update": "git push && npm run sync"
+    "update": "git push && npm run sync",
+    "encrypt": "node ./util/encrypt_data.js -e",
+    "decrypt": "node ./util/encrypt_data.js -d"
   },
   "devDependencies": {
+    "cryptr": "^4.0.2",
     "discord.js": "^11.4.2",
     "libsodium-wrappers": "^0.7.4",
     "opusscript": "0.0.6",
