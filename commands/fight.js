@@ -9,13 +9,15 @@ const dialogue_options = JSON.parse(require("../util/encrypt_data").getData()).d
 
  */
 function validate(content) {
-    let args = content.split(" ");
+    removedCommandName = content.slice(6);
 
-    if (args[1] === undefined || args[2] === undefined) {
+    let args = removedCommandName.split("|");
+
+    if (args[0] === undefined || args[1] === undefined) {
         return null;
     }
 
-    return [args[1], args[2]];
+    return [args[0].trim(), args[1].trim()];
 }
 
 function wrapUnderline(text) {
@@ -37,7 +39,8 @@ function getCombatDialogue(winner, loser, template) {
 
 let fight = {
     name: "fight",
-    desc: "`[name 1] [name 2]` Two members engage in a duel",
+    desc: "`name 1 | name 2` Two members engage in a duel, names separated by: |",
+    draft: true,
     callback: function (message) {
         let names = validate(message.content);
 
@@ -46,7 +49,7 @@ let fight = {
             let dialogue = random.flip() ? getCombatDialogue(names[0], names[1], template) : getCombatDialogue(names[1], names[0], template);
             message.channel.send(dialogue);
         } else {
-            message.channel.send("Try `!fight` again, structure doesn't match: `!fight name1 name2`");
+            message.channel.send("Try `!fight` again, structure doesn't match: `!fight name 1 | name 2`");
         }
     }
 };
