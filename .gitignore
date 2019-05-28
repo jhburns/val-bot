@@ -12,3 +12,5 @@ npm-debug.log
 
 #for the self ping
 /temp/*
+
+**/fighting_phrases.json # Just in case it committed when decrypted

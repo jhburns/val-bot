@@ -11,7 +11,12 @@ function randomRangeToMax(max) {
     return Math.floor(Math.random() * max);
 }
 
+function randomBoolean() {
+    return Math.random() >= 0.5;
+}
+
 module.exports = {
     ID: leftPadRandomInt,
-    quoteIndex: randomRangeToMax
+    quoteIndex: randomRangeToMax,
+    flip: randomBoolean
 };
