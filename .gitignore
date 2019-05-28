@@ -14,3 +14,4 @@ npm-debug.log
 /temp/*
 
 **/fighting_phrases.json # Just in case it committed when decrypted
+node_modules/
