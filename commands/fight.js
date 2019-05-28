@@ -38,7 +38,6 @@ function getCombatDialogue(winner, loser, template) {
 let fight = {
     name: "fight",
     desc: "`[name 1] [name 2]` Two members engage in a duel",
-    draft: true,
     callback: function (message) {
         let names = validate(message.content);
 
