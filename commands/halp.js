@@ -7,7 +7,9 @@ let halp = {
         let help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
 
         Command.all_commands.forEach(function (element) {
-            help += '**' + element.name + '** ' + element.desc + '\n';
+            if (!element.draft) {
+                help += '**' + element.name + '** ' + element.desc + '\n';
+            }
         });
 
         message.channel.send(help + "");
