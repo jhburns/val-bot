@@ -10,10 +10,23 @@ const path = require('path');
 
 const args = require('args');
 args
-    .option("draft", "Only allow commands with the 'draft' flag set to true to function");
+    .option("draft", "Only allow commands with the 'draft' flag set to true to responded to. Dynamically remap an existing command with 'realName->remapName'", "");
 const flags = args.parse(process.argv);
 
+/*
+  Parses the draft arguments for a command remapping
+ */
+function remapDraft(remapping) {
+    let values = remapping.split("->");
 
+    if (values[0] === '' || values[1] === '') {
+        return null;
+    }
+
+    return [values[0], values[1]];
+}
+
+const remap = remapDraft(flags.draft);
 
 /*
  Discord Client
@@ -139,6 +152,14 @@ bot.on('message', async message => {
     if (text.substring(0, 1) === '!') {
         let args = text.substring(1).split(' ');
         let cmd_name = args[0];
+        let is_remapped = false;
+
+        if (remap !== null && cmd_name === remap[1]) {
+            cmd_name = remap[0];
+            is_remapped = true;
+
+            logger.info("Remapping command '!" + remap[0] + "' to '!" + remap[1] + "' temporarily");
+        }
 
         let current_cmd = Command.all_commands.find(function(element) {
             return element.name === cmd_name;
@@ -146,10 +167,18 @@ bot.on('message', async message => {
 
         // Ignore commands that don't exist/can't be found
         if (current_cmd === undefined) {
+            if (is_remapped) {
+                logger.error("Remapping is not found, '!" + remap[0] + "' is not an existing command.");
+            }
+
             return;
         }
 
-        if (!current_cmd.draft ^ flags.draft) {
+        if (is_remapped) {
+            current_cmd.draft = true;
+        }
+
+        if (!current_cmd.draft ^ (flags.draft !== "")) {
             current_cmd.oncall(message, bot, quotes_text);
         } else if (!flags.draft) {
             logger.info('"!' + cmd_name + '"' + " command ignored due to running in production mode.");

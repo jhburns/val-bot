@@ -31,3 +31,7 @@ info: Run Instance ID: (706557) Up in: 1.254sec
 info: Running in: production mode
 info: All quotes loaded in: 3.082sec
 ````
+
+Use `npm run draft` to create new commands while a production instance is already running.
+Additionally, adding the args `npm run draft -- 'realName->remapName'` lets you treat an existing command
+as if 'draft' is true, under a remapping name.  
