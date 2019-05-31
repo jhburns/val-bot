@@ -8,6 +8,10 @@ let Command = require("./setup/command_class");
 const fs = require('fs');
 const path = require('path');
 
+
+/*
+  Argument Block
+ */
 const args = require('args');
 args
     .option("draft", "Only allow commands with the 'draft' flag set to true to responded to. Dynamically remap an existing command with 'realName->remapName'", "");
@@ -71,7 +75,7 @@ fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
         all_messages: the array to save each message to
 */
 function getAllMessages(channel, all_messages) {
-    let limit = 50;
+    let limit = 100;
     const getPromise = value => getMessageBlock(channel, limit, value);
 
     let count_messages;
