@@ -182,11 +182,13 @@ bot.on('message', async message => {
             current_cmd.draft = true;
         }
 
-        if (!current_cmd.draft ^ (flags.draft !== "")) {
+        logger.info(flags.draft !== "");
+
+        if (current_cmd.draft ^ !(flags.draft !== "")) {
             current_cmd.oncall(message, bot, quotes_text);
-        } else if (!flags.draft) {
+        } else if (flags.draft === "") {
             logger.info('"!' + cmd_name + '"' + " command ignored due to running in production mode.");
-        } else if (flags.draft) {
+        } else {
             logger.info('"!' + cmd_name + '"' + " command ignored due to running in draft mode.");
         }
     }
