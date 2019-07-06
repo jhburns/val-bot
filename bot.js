@@ -182,8 +182,6 @@ bot.on('message', async message => {
             current_cmd.draft = true;
         }
 
-        logger.info(flags.draft !== "");
-
         if (current_cmd.draft ^ !(flags.draft !== "")) {
             current_cmd.oncall(message, bot, quotes_text);
         } else if (flags.draft === "") {

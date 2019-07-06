@@ -1,9 +1,8 @@
 let spider = {
     name: "cool",
     desc: "Prints a coolio spider",
-    draft: true,
     callback: function (message) {
-        message.channel.send("/// (🕶️ _____ 🕶️ ) \\\\\\\\");
+        message.channel.send("//// ( :dark_sunglasses:️ __ :dark_sunglasses:️ ) \\\\\\\\\\\\\\");
     }
 };
 
