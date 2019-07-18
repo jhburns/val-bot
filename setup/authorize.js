@@ -9,7 +9,7 @@ function getAuthToken(bot) {
         require('dotenv').config();
         auth = process.env.TOKEN;
     } else {
-        aurh = process.env.TOKEN;
+        auth = process.env.TOKEN;
     }
 
     return function () {
