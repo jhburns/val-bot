@@ -205,6 +205,7 @@ login();
 /*
   Non-Bot process that can be in a child process
 */
+/*
 let fork = require('child_process').fork;
 
 let ping = fork(path.join(__dirname, "webserver/pingself.js"));
@@ -212,8 +213,8 @@ let ping = fork(path.join(__dirname, "webserver/pingself.js"));
 process.on('exit', function () {
     ping.kill();
 });
+*/
 
-
-//let endpoints = require("./webserver/endpoints");
-//endpoints();
+let endpoints = require("./webserver/endpoints");
+endpoints();
 
