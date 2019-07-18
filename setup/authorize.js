@@ -5,9 +5,11 @@ function getAuthToken(bot) {
 
     if (fs.existsSync('./node_modules/api-keys/auth.json')) {
         auth = require('../node_modules/api-keys/auth.json').token;
-    } else {
+    } else if (fs.existsSync('.env')){
         require('dotenv').config();
         auth = process.env.TOKEN;
+    } else {
+        aurh = process.env.TOKEN;
     }
 
     return function () {

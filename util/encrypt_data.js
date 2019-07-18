@@ -7,8 +7,10 @@ function getPassword() {
 
     if (fs.existsSync('./node_modules/api-keys/auth.json')) {
         password = require('../node_modules/api-keys/auth.json').data_key;
-    } else {
+    } else if (fs.existsSync('.env')) {
         require('dotenv').config();
+        password = process.env.DATA_KEY;
+    } else {
         password = process.env.DATA_KEY;
     }
 
