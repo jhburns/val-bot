@@ -19,7 +19,8 @@
     "winston": "^3.2.1",
     "discord.js": "^11.4.2",
     "libsodium-wrappers": "^0.7.4",
-    "opusscript": "0.0.6"
+    "opusscript": "0.0.6",
+    "cryptr": "^4.0.2"
   },
   "scripts": {
     "start": "node bot.js",
@@ -32,7 +33,6 @@
     "decrypt": "node ./util/encrypt_data.js -d"
   },
   "devDependencies": {
-    "cryptr": "^4.0.2",
     "sync-glitch-cli": "^2.0.1"
   },
   "optionalDependencies": {
