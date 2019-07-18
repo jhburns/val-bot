@@ -1,5 +1,4 @@
 {
   "port": 5384,
-  "endpoint_port": 3000,
   "url": "http://cyclic-narwhal.glitch.me/"
 }

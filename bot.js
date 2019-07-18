@@ -214,6 +214,6 @@ process.on('exit', function () {
 });
 
 
-let endpoints = require("./webserver/endpoints");
-endpoints();
+//let endpoints = require("./webserver/endpoints");
+//endpoints();
 

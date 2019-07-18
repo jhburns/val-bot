@@ -7,7 +7,7 @@ let config = require("./server_config");
 let ready = require("./ready");
 
 if (config.endpoint_port == null) {
-    config.endpoint_port = 9090;
+    config.endpoint_port = process.env.PORT;
 }
 
 module.exports = function () {
