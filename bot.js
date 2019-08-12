@@ -204,6 +204,7 @@ login();
 
 /*
   Non-Bot process that can be in a child process
+  Uncomment to have ping itself to stay awake
 */
 /*
 let fork = require('child_process').fork;
