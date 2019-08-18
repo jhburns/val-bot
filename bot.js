@@ -3,6 +3,7 @@
  */
 const logger = require("./util/logger");
 const random = require("./util/randoms");
+const fetchChannel = require('./util/fetch_channel');
 
 let Command = require("./setup/command_class");
 const fs = require('fs');
@@ -51,100 +52,18 @@ bot.on('error', (message) => {
 
 //global so the on message function can use it
 let quotes_text = [];
+let fighting_words_text = [];
 
 // Second on ready is to get quotes text async
 bot.on('ready', () => {
-    const quotes_channel = bot.channels.find(val => val.name === 'quotes');
-
-    if (quotes_channel != null) {
-        getAllMessages(quotes_channel, quotes_text);
-    } else {
-        logger.info("Not quotes channel found");
-    }
-
+    fetchChannel(bot, 'quotes', quotes_text);
+    fetchChannel(bot, 'fighting-words', fighting_words_text);
 });
 
 fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
     const currentCmd = require("./commands/" + file);
     new Command(currentCmd.name, currentCmd.desc, currentCmd.callback, currentCmd.draft);
 });
-
-
-/*  getAllMessages
-        channel: channel object that we want messages from
-        all_messages: the array to save each message to
-*/
-function getAllMessages(channel, all_messages) {
-    let limit = 100;
-    const getPromise = value => getMessageBlock(channel, limit, value);
-
-    let count_messages;
-    const loop = async value => {
-        //Uses a do while loop because first id is unknown
-        do  {
-            let message_block;
-
-            // waits for promise to be complete, so the messages can be chained together
-            try {
-                message_block = await getPromise(value);
-            } catch(err) {
-                logger.error(err);
-            }
-
-            //converts retrieved object to array
-            const message_array = message_block.array();
-            count_messages = message_array.length;
-
-            //Add each message to storage array
-            message_array.forEach(function (element) {
-                all_messages.unshift(element.content);
-            });
-
-            // Need to check if the entry is empty or not, having zero objects returned results in 'undefined' crash
-            if (message_array[message_array.length - 1] !== undefined) {
-                value = message_array[message_array.length - 1].id;
-            }
-            //If the amount of messages received is ever less than requested, we can assume that we're done
-        } while (count_messages >= limit);
-
-    };
-
-    //Starts the loop with a null value so the id can be ignored in the getMessageBlock() function
-    loop(null).then(function() {
-        logger.info("All quotes loaded in: " + process.uptime() + "sec");
-
-        let ready = require("./webserver/ready");
-        ready.is = true;
-    }).catch(function (err) {
-        logger.error(err);
-    });
-}
-
-/*
-    getMessageBlock
-        channel: channel object that we want messages from
-        limit: positive int, with a max of 100
-        start_before: can be null (to get start of messages) or id of message from where to start getting messages from
-        return: promise to get a block of messages
- */
-function getMessageBlock(channel, limit, start_before) {
-    let options;
-
-    if (start_before != null) {
-        options = {
-            limit: limit,
-            before: start_before
-        }
-    } else {
-        options = {
-            limit: limit
-        }
-    }
-
-    //Get a promise to receive messages from discord api
-    return channel.fetchMessages(options);
-}
-
 
 /*
  Commands block, how messages are handled
@@ -183,7 +102,7 @@ bot.on('message', async message => {
         }
 
         if (current_cmd.draft ^ !(flags.draft !== "")) {
-            current_cmd.oncall(message, bot, quotes_text);
+            current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
         } else if (flags.draft === "") {
             logger.info('"!' + cmd_name + '"' + " command ignored due to running in production mode.");
         } else {

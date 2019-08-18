@@ -1,7 +1,5 @@
 let random = require("../util/randoms");
 
-const dialogue_options = JSON.parse(require("../util/encrypt_data").getData()).dialogues;
-
 /*
     validate
         content: the string to check over
@@ -40,11 +38,11 @@ function getCombatDialogue(winner, loser, template) {
 let fight = {
     name: "fight",
     desc: "`name 1 | name 2` Two members engage in a duel, names separated by: |",
-    callback: function (message) {
+    callback: function (message, bot, { fighting_words_text }) {
         let names = validate(message.content);
 
         if (names !== null) {
-            let template = dialogue_options[random.intOfMax(dialogue_options.length)];
+            let template = fighting_words_text[random.intOfMax(fighting_words_text.length)];
             let dialogue = random.flip() ? getCombatDialogue(names[0], names[1], template) : getCombatDialogue(names[1], names[0], template);
             message.channel.send(dialogue);
         } else {
