@@ -113,6 +113,10 @@ bot.on('message', async message => {
     if (message.channel.name === 'quotes') {
         quotes_text.push(message.content);
     }
+
+    if (message.channel.name === 'fighting-words') {
+        fighting_words_text.push(message.content);
+    }
 });
 
 // Needs to be after rest of setup
