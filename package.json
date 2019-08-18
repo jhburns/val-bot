@@ -28,9 +28,7 @@
     "map": "node bot.js -d",
     "sync": "node glitch-sync.js -d -p",
     "safe-sync": "node glitch-sync.js -d",
-    "update": "git push && npm run sync",
-    "encrypt": "node ./util/encrypt_data.js -e",
-    "decrypt": "node ./util/encrypt_data.js -d"
+    "update": "git push && npm run sync"
   },
   "devDependencies": {
     "sync-glitch-cli": "^2.0.1"
