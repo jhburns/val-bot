@@ -1,18 +1,12 @@
-let random = require("../util/randoms");
+let random = require('../util/randoms')
 
 /*
     validate
         content: the string to check over
     returns list of two names if correct form, else returns null
-
  */
 function validate(content) {
-    let spaceDelimited = content.split(" ");
-    spaceDelimited.shift();
-    console.log(spaceDelimited);
-    let removedCommandName = spaceDelimited.join("");
-
-    console.log(removedCommandName);
+    removedCommandName = content.slice(6);
 
     let args = removedCommandName.split("|");
 
@@ -20,7 +14,7 @@ function validate(content) {
         return null;
     }
 
-    return [args[0].trim(), args[1].trim()];
+    return args.map((arg) => arg.trim());
 }
 
 function wrapUnderline(text) {
@@ -40,17 +34,51 @@ function getCombatDialogue(winner, loser, template) {
     return  eval("`" + template + "`"); //safe because template is forced to be a string literal
 }
 
+/*
+    eliminate
+        names: string array of each of the player's names
+        returns object of players left, and the winner and loser
+*/
+function eliminate(names) {
+    let players = names.slice(0); // Clone array
+    let loser_index = random.intOfMax(players.length);
+    let loser = players[loser_index];
+    players.splice(loser_index, 1);
+
+    return {
+        players,
+        winner: players[random.intOfMax(players.length)],
+        loser,
+    }
+}
+
+function getRounds(players, fighting_words_text) {
+    let fullDialogue = "";
+    let victor = "";
+
+    while (players.length > 1) {
+        let players_left = eliminate(players);
+
+        fullDialogue += getCombatDialogue(players_left.winner, players_left.loser, fighting_words_text[random.intOfMax(fighting_words_text.length)]);
+        fullDialogue += "\n\n";
+
+        victor = players_left.winner;
+        players = players_left.players;
+    }
+
+    fullDialogue += `The victor is **${ victor }!**`;
+
+    return fullDialogue;
+}
+
 let fight = {
     name: "fight",
-    alias: "f",
-    desc: "`name 1 | name 2` Two members engage in a duel, names separated by: |",
+    desc: "`name 1 | name 2` Two members engage in a duel, names separated by: |. Or use multiple names for a battle royal.",
     callback: function (message, bot, { fighting_words_text }) {
         let names = validate(message.content);
 
         if (names !== null) {
-            let template = fighting_words_text[random.intOfMax(fighting_words_text.length)];
-            let dialogue = random.flip() ? getCombatDialogue(names[0], names[1], template) : getCombatDialogue(names[1], names[0], template);
-            message.channel.send(dialogue);
+            message.channel.send(getRounds(names, fighting_words_text));
         } else {
             message.channel.send("Try `!fight` again, structure doesn't match: `!fight name 1 | name 2`");
         }
