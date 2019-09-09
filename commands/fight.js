@@ -9,7 +9,7 @@ function validate(content) {
     let spaceDelimited = content.split(" ");
     spaceDelimited.shift();
 
-    let removedCommandName = spaceDelimited.join("");
+    let removedCommandName = spaceDelimited.join(" ");
 
     let args = removedCommandName.split("|");
 
