@@ -1,5 +1,6 @@
 let first = {
     name: "first",
+    alias: "1",
     desc: "says the most recently posted quote from the quotes channel",
     callback: function (message, bot, { quotes_text }) {
         message.channel.send(">>> " + quotes_text[quotes_text.length - 1]);

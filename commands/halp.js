@@ -2,6 +2,7 @@ const Command = require("../setup/command_class");
 
 let halp = {
     name: "halp",
+    alias: "h",
     desc:"gives information on commands",
     callback:function (message) {
         let help = "`Put a ! in front of each command and a space before each subcommand`\n\n";

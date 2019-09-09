@@ -2,8 +2,9 @@ class Command {
     //name should be string,
     //desc should also be a string, but longer
     // oncall should be function
-    constructor(name, desc, oncall, draft) {
+    constructor(name, alias, desc, oncall, draft) {
         this.name = name;
+        this.alias = alias;
         this.oncall = oncall;
         this.desc = desc;
 

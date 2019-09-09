@@ -62,7 +62,7 @@ bot.on('ready', () => {
 
 fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
     const currentCmd = require("./commands/" + file);
-    new Command(currentCmd.name, currentCmd.desc, currentCmd.callback, currentCmd.draft);
+    new Command(currentCmd.name, currentCmd.alias, currentCmd.desc, currentCmd.callback, currentCmd.draft);
 });
 
 /*
@@ -85,7 +85,7 @@ bot.on('message', async message => {
         }
 
         let current_cmd = Command.all_commands.find(function(element) {
-            return element.name === cmd_name;
+            return (element.name === cmd_name || element.alias === cmd_name);
         });
 
         // Ignore commands that don't exist/can't be found
@@ -96,6 +96,7 @@ bot.on('message', async message => {
 
             return;
         }
+
 
         if (is_remapped) {
             current_cmd.draft = true;
