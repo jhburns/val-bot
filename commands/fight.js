@@ -6,7 +6,10 @@ let random = require('../util/randoms')
     returns list of two names if correct form, else returns null
  */
 function validate(content) {
-    removedCommandName = content.slice(6);
+    let spaceDelimited = content.split(" ");
+    spaceDelimited.shift();
+
+    let removedCommandName = spaceDelimited.join("");
 
     let args = removedCommandName.split("|");
 
@@ -73,6 +76,7 @@ function getRounds(players, fighting_words_text) {
 
 let fight = {
     name: "fight",
+    alias: "f",
     desc: "`name 1 | name 2` Two members engage in a duel, names separated by: |. Or use multiple names for a battle royal.",
     callback: function (message, bot, { fighting_words_text }) {
         let names = validate(message.content);

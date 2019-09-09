@@ -9,7 +9,7 @@ let halp = {
 
         Command.all_commands.forEach(function (element) {
             if (!element.draft) {
-                help += '**' + element.name + '** ' + element.desc + '\n';
+                help += `**${ element.name }** (${ element.alias }) ${ element.desc }\n`;
             }
         });
 

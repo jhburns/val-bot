@@ -1,6 +1,6 @@
 let pong = {
     name: "pong",
-    alias: "p",
+    alias: "po",
     desc: "test val's performance",
     callback: function (message, bot) {
         let start = Date.now();
