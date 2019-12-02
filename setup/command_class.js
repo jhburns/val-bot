@@ -2,11 +2,12 @@ class Command {
     //name should be string,
     //desc should also be a string, but longer
     // oncall should be function
-    constructor(name, alias, desc, oncall, draft) {
+    constructor(name, alias, desc, oncall, draft, interpolated_value) {
         this.name = name;
         this.alias = alias;
         this.oncall = oncall;
         this.desc = desc;
+        this.interpolated_value = interpolated_value;
 
         if (draft == undefined || draft == null) {
             this.draft = false;

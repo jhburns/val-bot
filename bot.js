@@ -62,7 +62,7 @@ bot.on('ready', () => {
 
 fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
     const currentCmd = require("./commands/" + file);
-    new Command(currentCmd.name, currentCmd.alias, currentCmd.desc, currentCmd.callback, currentCmd.draft);
+    new Command(currentCmd.name, currentCmd.alias, currentCmd.desc, currentCmd.callback, currentCmd.draft, currentCmd.interpolated_value);
 });
 
 /*
@@ -112,11 +112,19 @@ bot.on('message', async message => {
     }
 
     if (message.channel.name === 'quotes') {
-        quotes_text.push(message.content);
+        quotes_text.push(text);
     }
 
     if (message.channel.name === 'fighting-words') {
-        fighting_words_text.push(message.content);
+        fighting_words_text.push(text);
+    }
+
+    if (text.toLowerCase().includes("bone") && !message.author.bot) {
+        let current_cmd = Command.all_commands.find(function(element) {
+            return element.interpolated_value === "bone"
+        });
+
+        current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
     }
 });
 

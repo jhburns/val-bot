@@ -1,10 +1,11 @@
 let bone = {
-    name: "bone",
-    alias: "b",
-    desc: "Brooklyn 99 reference.",
+    interpolated_value: "bone",
+    name: null,
+    alias: null,
+    desc: "Responds to anything that is not \"bone\"less",
     callback: function (message) {
         message.channel.send({files: ["./img/b99.png"]});
-        message.channel.send("BONE");
+        message.channel.send("**BONE**");
     }
 };
 

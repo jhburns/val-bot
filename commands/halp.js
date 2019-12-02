@@ -8,7 +8,7 @@ let halp = {
         let help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
 
         Command.all_commands.forEach(function (element) {
-            if (!element.draft) {
+            if (!element.draft && element.name != null) {
                 help += `**${ element.name }** (${ element.alias }) ${ element.desc }\n`;
             }
         });
