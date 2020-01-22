@@ -39,6 +39,9 @@ const remap = remapDraft(flags.draft);
 const Discord = require('discord.js');
 const bot = new Discord.Client({});
 
+let auth = require("./setup/authorize");
+let login = auth.connect(bot);
+
 bot.on('ready', () => {
     logger.info('Connected');
     logger.info(bot.user.username + ' - userID (' + bot.user.id + ')');
@@ -136,26 +139,8 @@ bot.on('message', async message => {
     }
 });
 
-
 // Needs to be after rest of setup
-let auth = require("./setup/authorize");
-let login = auth.connect(bot);
 login();
-
-
-/*
-  Non-Bot process that can be in a child process
-  Uncomment to have ping itself to stay awake
-*/
-/*
-let fork = require('child_process').fork;
-
-let ping = fork(path.join(__dirname, "webserver/pingself.js"));
-
-process.on('exit', function () {
-    ping.kill();
-});
-*/
 
 let endpoints = require("./webserver/endpoints");
 endpoints();
