@@ -44,9 +44,9 @@ let login = auth.connect(bot);
 
 bot.on('ready', () => {
     logger.info('Connected');
-    logger.info(bot.user.username + ' - userID (' + bot.user.id + ')');
-    logger.info('Run Instance ID: ' + '(' + random.ID(0, 999999) + ')' + ' Up in: ' + process.uptime() + 'sec');
-    logger.info('Running in: ' + (flags.draft ? 'draft' : 'production') + ' mode');
+    logger.info(`${bot.user.username} - userID (${bot.user.id})`);
+    logger.info(`Run Instance ID: (${random.ID(0, 999999)}) Up in: ${process.uptime()} sec`);
+    logger.info(`Running in: ${flags.draft ? 'draft' : 'production'} mode`);
 });
 
 bot.on('error', (message) => {
@@ -84,7 +84,7 @@ bot.on('message', async message => {
             cmd_name = remap[0];
             is_remapped = true;
 
-            logger.info("Remapping command '!" + remap[0] + "' to '!" + remap[1] + "' temporarily");
+            logger.info(`Remapping command '!${remap[0]}' to '!${remap[1]}' temporarily.`);
         }
 
         let current_cmd = Command.all_commands.find(function(element) {
@@ -94,7 +94,7 @@ bot.on('message', async message => {
         // Ignore commands that don't exist/can't be found
         if (current_cmd === undefined) {
             if (is_remapped) {
-                logger.error("Remapping is not found, '!" + remap[0] + "' is not an existing command.");
+                logger.error(`Remapping is not found, '!${remap[0]}' is not an existing command.`);
             }
 
             return;
