@@ -126,7 +126,16 @@ bot.on('message', async message => {
 
         current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
     }
+
+    if (text.toLowerCase().includes("byleth") && !message.author.bot) {
+        let current_cmd = Command.all_commands.find(function(element) {
+            return element.interpolated_value === "byleth"
+        });
+
+        current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
+    }
 });
+
 
 // Needs to be after rest of setup
 let auth = require("./setup/authorize");
