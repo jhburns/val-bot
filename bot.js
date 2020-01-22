@@ -122,7 +122,8 @@ bot.on('message', async message => {
         fighting_words_text.push(text);
     }
 
-    if (text.toLowerCase().includes("bone") && !message.author.bot) {
+    let body = text.toLowerCase();
+    if (body.includes("bone") && !message.author.bot) {
         let current_cmd = Command.all_commands.find(function(element) {
             return element.interpolated_value === "bone"
         });
@@ -130,7 +131,7 @@ bot.on('message', async message => {
         current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
     }
 
-    if ((text.toLowerCase().includes("byleth") || text.toLowerCase().includes("salty")) && !message.author.bot) {
+    if ((body.includes("byleth") || body.includes("salty")) && !message.author.bot) {
         let current_cmd = Command.all_commands.find(function(element) {
             return element.interpolated_value === "byleth"
         });
