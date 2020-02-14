@@ -14,6 +14,7 @@ let splice = {
         const body = `>>> ${ first_half } ${ second_half }`;
 
         message.channel.send(body)
+            /*
             .then((new_message) => {
                new_message
                    .react('⭐')
@@ -28,6 +29,7 @@ let splice = {
                            })
                    })
             });
+            */
     }
 };
 
