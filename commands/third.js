@@ -1,7 +1,7 @@
 let third = {
     name: "third",
     alias: "3",
-    desc: "says the third most recently posted quote from the quotes channel",
+    desc: "says the third most recently posted quote from <#465772508671508490>",
     callback: function (message, bot, { quotes_text }) {
         message.channel.send(">>> " + quotes_text[quotes_text.length - 3]);
     }
