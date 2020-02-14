@@ -77,7 +77,7 @@ function getRounds(players, fighting_words_text) {
 let fight = {
     name: "fight",
     alias: "f",
-    desc: "`name 1 | name 2 (| name 3)` Two things engage in a duel, names separated by: `|`. Add more templates in <#612712686412890112>.",
+    desc: "`name 1 | name 2 (| name 3)` Two or more things engage in a duel, names separated by: `|`. Add more templates in <#612712686412890112>.",
     callback: function (message, bot, { fighting_words_text }) {
         let names = validate(message.content);
 
