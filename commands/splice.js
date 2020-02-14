@@ -1,5 +1,14 @@
 let random = require("../util/randoms");
 
+function improveText(text) {
+    const  no_linebreaks = text.replace(/\n/g, ' ');
+    const stripped = no_linebreaks.replace(/\s+/g, ' ');
+    const no_quotes = stripped.replace(/"/g, '').replace(/“/g, '').replace(/”/g, '');
+    const  wrapped_quotes = `>>> "${no_quotes}"`;
+
+    return wrapped_quotes;
+}
+
 let splice = {
     name: "splice",
     alias: "s",
@@ -11,7 +20,7 @@ let splice = {
         const first_half = first_quote.slice(0, first_quote.length / 2).join(" ");
         const second_half = second_quote.slice(second_quote.length / 2, second_quote.length).join(" ");
 
-        const body = `>>> ${ first_half } ${ second_half }`;
+        const body = improveText(`${ first_half } ${ second_half }`);
 
         message.channel.send(body)
             .then((new_message) => {
