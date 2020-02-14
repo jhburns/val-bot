@@ -4,7 +4,6 @@ let splice = {
     name: "splice",
     alias: "s",
     desc: "mashes two quotes together",
-    draft: true,
     callback: function (message, bot, { quotes_text }) {
         const first_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
         const second_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
