@@ -14,13 +14,12 @@ let splice = {
         const body = `>>> ${ first_half } ${ second_half }`;
 
         message.channel.send(body)
-            /*
             .then((new_message) => {
                new_message
                    .react('⭐')
                    .then(() => {
-                       const filter = (reaction) => {
-                           return reaction.emoji.name === '⭐';
+                       const filter = (reaction, user) => {
+                           return reaction.emoji.name === '⭐' && !user.bot;
                        };
 
                        new_message.awaitReactions(filter, { max: 1, time: 15000 })
@@ -29,7 +28,6 @@ let splice = {
                            })
                    })
             });
-            */
     }
 };
 
