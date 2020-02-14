@@ -5,13 +5,15 @@ let halp = {
     alias: "h",
     desc:"gives information on commands",
     callback:function (message) {
-        let help = "`Put a ! in front of each command and a space before each subcommand`\n\n";
+        let help = "Commands\n\n";
 
         Command.all_commands.forEach(function (element) {
             if (!element.draft && element.name != null) {
-                help += `**${ element.name }** (${ element.alias }) ${ element.desc }\n`;
+                help += `**!${ element.name }** (${ element.alias }) ${ element.desc }\n`;
             }
         });
+
+        help += "`Put a space before each subcommand`\n";
 
         message.channel.send(help + "");
     }
