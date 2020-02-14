@@ -26,7 +26,7 @@ function getAllMessages(channel, name, global_store) {
             // waits for promise to be complete, so the messages can be chained together
             try {
                 message_block = await getPromise(value);
-            } catch(err) {
+            } catch (err) {
                 logger.error(err);
             }
 
