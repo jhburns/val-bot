@@ -9,6 +9,7 @@ let Command = require("./setup/command_class");
 const fs = require('fs');
 const path = require('path');
 
+let banished = require("./util/banished_list");
 
 /*
   Argument Block
@@ -75,6 +76,10 @@ fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
 bot.on('message', async message => {
     let text = message.content;
 
+    if (checkBanished(message)) {
+        return;
+    }
+
     if (text.substring(0, 1) === '!') {
         let args = text.substring(1).split(' ');
         let cmd_name = args[0];
@@ -139,6 +144,14 @@ bot.on('message', async message => {
         current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
     }
 });
+
+function checkBanished(message) {
+    if (banished.includes(message.author.id) && message.channel.name !== "super-weenie-hut-jrs") {
+        message.delete();
+    }
+
+    return false;
+}
 
 // Needs to be after rest of setup
 login();
