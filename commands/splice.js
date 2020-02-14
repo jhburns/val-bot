@@ -14,7 +14,6 @@ let splice = {
         const body = `>>> ${ first_half } ${ second_half }`;
 
         message.channel.send(body)
-            /*
             .then((new_message) => {
                new_message
                    .react('⭐')
@@ -23,13 +22,14 @@ let splice = {
                            return reaction.emoji.name === '⭐' && !user.bot;
                        };
 
-                       new_message.awaitReactions(filter, { max: 1, time: 15000 })
-                           .then(() => {
-                               bot.channels.get("677726820438769674").send(body);
+                       new_message.awaitReactions(filter, { max: 1, time: 999999 })
+                           .then((collector) => {
+                               if (collector.size > 0 ) {
+                                   bot.channels.get("677726820438769674").send(body);
+                               }
                            })
                    })
             });
-            */
     }
 };
 
