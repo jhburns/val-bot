@@ -13,7 +13,7 @@ function getAuthToken(bot) {
     }
 
     return function () {
-        bot.login(auth)
+        bot.login(auth);
     }
 }
 
