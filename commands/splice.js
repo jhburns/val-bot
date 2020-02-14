@@ -1,5 +1,8 @@
 let random = require("../util/randoms");
 
+
+
+
 function improveText(text) {
     const  no_linebreaks = text.replace(/\n/g, ' ');
     const stripped = no_linebreaks.replace(/\s+/g, ' ');

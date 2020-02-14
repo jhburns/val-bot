@@ -5,7 +5,7 @@ let upp = {
     alias: "u",
     desc: "gets how long the val has been painting for",
     callback: function (message) {
-        message.channel.send('I have been painting for about ' + format.getUptime());
+        message.channel.send('I have been busy playing Pixel Painter for about: ' + format.getUptime() + " ᶠʳᵉᵉ ᵐᵉᵉ" );
     }
 };
 
