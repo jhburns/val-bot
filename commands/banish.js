@@ -29,7 +29,7 @@ let banish = {
             }
         } else {
             message.channel.send("You really thought you could do that?");
-            banishUser(message, user, removedCommandName);
+            banishUser(message, message.author, removedCommandName);
         }
     }
 };
