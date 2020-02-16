@@ -36,7 +36,7 @@ function improveText(text, callback) {
     const  wrapped_quotes = `>>> "${no_quotes}"`;
 
     improveGrammar(wrapped_quotes, (fixed_grammar) => {
-        callback(fixed_grammar);
+        callback(fixed_grammar.trim());
     });
 }
 
