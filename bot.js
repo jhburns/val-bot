@@ -140,6 +140,7 @@ bot.on('message', async message => {
 function checkBanished(message) {
     if (banished.includes(message.author.id) && message.channel.name !== "super-weenie-hut-jrs") {
         message.delete();
+        return true;
     }
 
     return false;
