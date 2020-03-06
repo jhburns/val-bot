@@ -35,14 +35,10 @@ function improveText(text, callback) {
     const no_quotes = stripped.replace(/"/g, '').replace(/“/g, '').replace(/”/g, '');
     const trimmed = no_quotes.trim();
     const  wrapped_quotes = `>>> "${trimmed}"`;
-
-    /*
+    
     improveGrammar(wrapped_quotes, (fixed_grammar) => {
         callback(fixed_grammar);
     });
-    */
-
-    callback(wrapped_quotes);
 }
 
 let splice = {
