@@ -35,7 +35,7 @@ function improveText(text, callback) {
     const no_quotes = stripped.replace(/"/g, '').replace(/“/g, '').replace(/”/g, '');
     const trimmed = no_quotes.trim();
     const  wrapped_quotes = `>>> "${trimmed}"`;
-    
+
     improveGrammar(wrapped_quotes, (fixed_grammar) => {
         callback(fixed_grammar);
     });
@@ -43,7 +43,7 @@ function improveText(text, callback) {
 
 let splice = {
     name: "splice",
-    alias: "s",
+    alias: "sp",
     desc: "mashes two quotes together, star it to have val-bot preserve it in <#677726820438769674>",
     callback: function (message, bot, { quotes_text }) {
         const first_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
