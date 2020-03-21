@@ -60,8 +60,8 @@ let fighting_words_text = [];
 
 // Second on ready is to get quotes text async
 bot.on('ready', () => {
-    fetchChannel(bot, 'quotes', quotes_text);
-    fetchChannel(bot, 'fighting-words', fighting_words_text);
+    fetchChannel(bot, '💬quotes', quotes_text);
+    fetchChannel(bot, '⚔fighting-words', fighting_words_text);
 });
 
 fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
