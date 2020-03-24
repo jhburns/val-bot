@@ -64,7 +64,7 @@ let splice = {
 
                             new_message.awaitReactions(filter, { max: 1, time: 999999 })
                                 .then((collector) => {
-                                    if (collector.size > 0 ) {
+                                    if (collector.size > 1) {
                                         bot.channels.get("677726820438769674").send(improved);
                                     }
                                 })
