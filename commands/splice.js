@@ -44,7 +44,7 @@ function improveText(text, callback) {
 let splice = {
     name: "splice",
     alias: "sp",
-    desc: "mashes two quotes together, star it to have val-bot preserve it in <#677726820438769674>",
+    desc: "mashes two quotes together, if two people star it then val-bot copies it to <#677726820438769674>",
     callback: function (message, bot, { quotes_text }) {
         const first_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
         const second_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
