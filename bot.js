@@ -119,7 +119,7 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.channel.name === 'quotes') {
+    if (message.channel.name === '💬quotes') {
         quotes_text.push(text);
     }
 
@@ -138,7 +138,7 @@ bot.on('message', async message => {
 });
 
 function checkBanished(message) {
-    if (banished.includes(message.author.id) && message.channel.name !== "super-weenie-hut-jrs") {
+    if (banished.includes(message.author.id) && message.channel.name !== "🧽super-weenie-hut-jrs") {
         message.delete();
         return true;
     }
