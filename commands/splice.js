@@ -59,7 +59,7 @@ let splice = {
                         .react('⭐')
                         .then(() => {
                             const filter = (reaction, user) => {
-                                return /*reaction.emoji.name=== '⭐'&& */ !user.bot;
+                                return reaction.emoji.name=== '⭐' && !user.bot;
                             };
 
                             new_message.awaitReactions(filter, { max: 2, time: 10000000 })
