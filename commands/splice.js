@@ -59,15 +59,11 @@ let splice = {
                         .react('⭐')
                         .then(() => {
                             const filter = (reaction, user) => {
-                                return reaction.emoji.name=== '⭐' && !user.bot;
+                                return reaction.emoji.name === '⭐' && !user.bot;
                             };
 
                             new_message.awaitReactions(filter, { max: 2, time: 90000000 })
-                                .then((collector) => {
-                                    if (collector.size > 1) {
-                                        bot.channels.get("677726820438769674").send(improved);
-                                    }
-                                })
+                                .then(() => bot.channels.get("677726820438769674").send(improved))
                         })
                 });
         });
