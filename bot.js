@@ -111,7 +111,7 @@ bot.on('message', async message => {
         }
 
         if (current_cmd.draft ^ !(flags.draft !== "")) {
-            current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
+            current_cmd.oncall(message, { bot, quotes_text, fighting_words_text });
         } else if (flags.draft === "") {
             logger.info('"!' + cmd_name + '"' + " command ignored due to running in production mode.");
         } else {

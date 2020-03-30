@@ -2,7 +2,7 @@ let pong = {
     name: "pong",
     alias: "po",
     desc: "test val's performance",
-    callback: function (message, bot) {
+    callback: function (message, { bot }) {
         let start = Date.now();
 
         message.channel.send("pong!")

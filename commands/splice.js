@@ -45,7 +45,7 @@ let splice = {
     name: "splice",
     alias: "sp",
     desc: "mashes two quotes together, if two people star it then val-bot copies it to <#677726820438769674>",
-    callback: function (message, bot, { quotes_text }) {
+    callback: function (message, { quotes_text }) {
         const first_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
         const second_quote = quotes_text[random.intOfMax(quotes_text.length)].split(" ");
 
@@ -63,7 +63,7 @@ let splice = {
                             };
 
                             new_message.awaitReactions(filter, { max: 2, time: 90000000 })
-                                .then(() => bot.channels.get("677726820438769674").send(improved))
+                                .then(() => bot.channels.get("677726820438769674").send(improved));
                         })
                 });
         });
