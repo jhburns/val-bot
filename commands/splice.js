@@ -62,7 +62,7 @@ let splice = {
                                 return reaction.emoji.name === '⭐' && !user.bot;
                             };
 
-                            new_message.awaitReactions(filter, { max: 1, time: 90000000 })
+                            new_message.awaitReactions(filter, { max: 2, time: 90000000 })
                                 .then(() => bot.channels.get("677726820438769674").send(improved));
                         })
                 });
