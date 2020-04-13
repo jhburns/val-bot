@@ -33,9 +33,17 @@ let dink_on = {
         voiceChannel
             .join()
             .then(connection => {
+                setTimeout(() => {
+                    connection.disconnect();
+                    voiceChannel.leave();
+
+                    is_on = false;
+                }, 60000);
+
                 let spaceDelimited = message.cleanContent.replace("@", "").split(" ");
                 spaceDelimited.shift();
                 let removedCommandName = spaceDelimited.join(" ");
+                removedCommandName = removedCommandName.substring(0, 300);
                 if (removedCommandName.trim() === "" ) {
                     removedCommandName = "nobody";
                 }
@@ -74,20 +82,6 @@ let dink_on = {
 
                                         is_on = false;
                                     });
-                                });
-
-                                broadcast_dink.once("error", () => {
-                                    connection.disconnect();
-                                    voiceChannel.leave();
-
-                                    is_on = false;
-                                });
-
-                                broadcast_say.once("error", () => {
-                                    connection.disconnect();
-                                    voiceChannel.leave();
-
-                                    is_on = false;
                                 });
                             });
                         }
