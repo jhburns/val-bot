@@ -40,7 +40,7 @@ let dink_on = {
                     removedCommandName = "nobody";
                 }
 
-                const voices = ['Ivy', 'Kimberly', 'Geraint'];
+                const voices = ['Ivy', 'Kimberly', 'Geraint', 'Mizuki'];
                 const params = {
                     Text: `Get dinked on ${ removedCommandName } `,
                     TextType: 'text',
@@ -74,7 +74,21 @@ let dink_on = {
 
                                         is_on = false;
                                     });
-                                })
+                                });
+
+                                broadcast_dink.once("error", () => {
+                                    connection.disconnect();
+                                    voiceChannel.leave();
+
+                                    is_on = false;
+                                });
+
+                                broadcast_say.once("error", () => {
+                                    connection.disconnect();
+                                    voiceChannel.leave();
+
+                                    is_on = false;
+                                });
                             });
                         }
                     }
