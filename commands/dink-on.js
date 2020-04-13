@@ -24,7 +24,6 @@ let dink_on = {
     name: "dink-on",
     alias: "on",
     desc: "`text to say (| voice name)` Dinks on the given user in the voice channel the you are in.",
-    draft: false,
     callback: function (message, {bot}) {
         if (is_on) {
             message.channel.send("Please wait your turn, I am busy dinking someone already.");
@@ -44,10 +43,11 @@ let dink_on = {
 
         let voice = "";
         const voice_keys = Object.keys(voices);
-        let barDelimited = removedCommandName.split("|");
-        if (barDelimited.length > 1) {
+        if (removedCommandName.includes("|")) {
+            let barDelimited = removedCommandName.split("|");
             const  trimmed = barDelimited[1].trim();
             const index = includesNoCase(voice_keys, trimmed);
+
             if (index < 0) {
                 message.channel.send("Sorry, that name is not found. Try `!voices` to learn all possible voices.");
                 return;
@@ -56,7 +56,7 @@ let dink_on = {
             voice = voice_keys[index];
             removedCommandName = barDelimited[0];
         } else {
-            voice = voice_keys[random.intOfMax(voices.length)];
+            voice = voice_keys[random.intOfMax(voice_keys.length)];
         }
 
         removedCommandName = removedCommandName.substring(0, 300);

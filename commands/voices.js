@@ -14,7 +14,7 @@ let test = {
     callback: function (message) {
         let content = "Voices\n\n";
         let sorted = sortObject(voices);
-        
+
         for (const [ key, value ] of Object.entries(sorted)) {
             content += `**${ key }** ${ value }\n`;
         }
