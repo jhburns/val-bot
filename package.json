@@ -35,6 +35,8 @@
     "update": "git push && npm run sync"
   },
   "devDependencies": {
+    "@discordjs/uws": "^10.149.0",
+    "aws-sdk": "^2.656.0",
     "sync-glitch-cli": "^2.0.1"
   },
   "optionalDependencies": {
