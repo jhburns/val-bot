@@ -1,5 +1,6 @@
 const fs = require("fs");
 const aws = require('aws-sdk');
+let random = require("../util/randoms");
 
 let is_on = false;
 
@@ -39,11 +40,12 @@ let dink_on = {
                     removedCommandName = "nobody";
                 }
 
+                const voices = ['Ivy', 'Kimberly', 'Geraint'];
                 const params = {
                     Text: `Get dinked on ${ removedCommandName } `,
                     TextType: 'text',
                     OutputFormat: 'mp3',
-                    VoiceId: 'Kimberly',
+                    VoiceId: voices[random.intOfMax(voices.length)],
                 };
 
                 polly.synthesizeSpeech(params, (err, data) => {
