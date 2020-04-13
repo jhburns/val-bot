@@ -1,6 +1,7 @@
 const fs = require("fs");
 const aws = require('aws-sdk');
-let random = require("../util/randoms");
+const random = require("../util/randoms");
+const voices = require("../util/voices");
 
 let is_on = false;
 
@@ -9,17 +10,26 @@ const polly = new aws.Polly({
     region: 'us-west-1'
 });
 
+function includesNoCase(array, value) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].toLowerCase() === value.toLowerCase()) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
 let dink_on = {
     name: "dink-on",
     alias: "on",
-    desc: "`@user` Dinks on the given user in the voice channel the you are in",
+    desc: "`text to say (| voice name)` Dinks on the given user in the voice channel the you are in.",
     draft: false,
     callback: function (message, {bot}) {
         if (is_on) {
             message.channel.send("Please wait your turn, I am busy dinking someone already.");
             return;
         }
-        is_on = true;
 
         let voiceChannel = message.member.voiceChannel;
         if (voiceChannel === undefined) {
@@ -27,8 +37,37 @@ let dink_on = {
             return;
         }
 
+        let spaceDelimited = message.cleanContent.replace("@", "").split(" ");
+        spaceDelimited.shift();
+
+        let removedCommandName = spaceDelimited.join(" ");
+
+        let voice = "";
+        const voice_keys = Object.keys(voices);
+        let barDelimited = removedCommandName.split("|");
+        if (barDelimited.length > 1) {
+            const  trimmed = barDelimited[1].trim();
+            const index = includesNoCase(voice_keys, trimmed);
+            if (index < 0) {
+                message.channel.send("Sorry, that name is not found. Try `!voices` to learn all possible voices.");
+                return;
+            }
+
+            voice = voice_keys[index];
+            removedCommandName = barDelimited[0];
+        } else {
+            voice = voice_keys[random.intOfMax(voices.length)];
+        }
+
+        removedCommandName = removedCommandName.substring(0, 300);
+        if (removedCommandName.trim() === "" ) {
+            removedCommandName = "nobody";
+        }
+
         const broadcast_dink = bot.createVoiceBroadcast();
         const broadcast_say = bot.createVoiceBroadcast();
+
+        is_on = true;
 
         voiceChannel
             .join()
@@ -40,20 +79,11 @@ let dink_on = {
                     is_on = false;
                 }, 60000);
 
-                let spaceDelimited = message.cleanContent.replace("@", "").split(" ");
-                spaceDelimited.shift();
-                let removedCommandName = spaceDelimited.join(" ");
-                removedCommandName = removedCommandName.substring(0, 300);
-                if (removedCommandName.trim() === "" ) {
-                    removedCommandName = "nobody";
-                }
-
-                const voices = ['Ivy', 'Kimberly', 'Geraint', 'Mizuki'];
                 const params = {
                     Text: `Get dinked on ${ removedCommandName } `,
                     TextType: 'text',
                     OutputFormat: 'mp3',
-                    VoiceId: voices[random.intOfMax(voices.length)],
+                    VoiceId: voice,
                 };
 
                 polly.synthesizeSpeech(params, (err, data) => {
