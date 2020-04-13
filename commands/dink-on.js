@@ -12,7 +12,7 @@ let dink_on = {
     name: "dink-on",
     alias: "on",
     desc: "`@user` Dinks on the given user in the voice channel the you are in",
-    draft: true,
+    draft: false,
     callback: function (message, {bot}) {
         if (is_on) {
             message.channel.send("Please wait your turn, I am busy dinking someone already.");
