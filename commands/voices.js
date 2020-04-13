@@ -12,8 +12,8 @@ let test = {
     alias: "v",
     desc: "List all of the possible voice names.",
     callback: function (message) {
-        let content = "Voices\n\n";
-        let sorted = sortObject(voices);
+        let content = "__Voices__\n\n";
+        let sorted = sortObject(voices.list);
 
         for (const [ key, value ] of Object.entries(sorted)) {
             content += `**${ key }** ${ value }\n`;

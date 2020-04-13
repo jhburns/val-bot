@@ -20,9 +20,9 @@ function includesNoCase(array, value) {
 }
 
 let dink_on = {
-    name: "dink-on",
-    alias: "on",
-    desc: "`text to say (| voice name)` Dinks on the given user in the voice channel the you are in.",
+    name: "yell",
+    alias: "y",
+    desc: "`text to say (| voice name)` Yell given text in voice channel the you are in.",
     callback: function (message, {bot}) {
         if (voices.is_on) {
             message.channel.send("Please wait your turn, I am busy in a voice chat already.");
@@ -60,13 +60,11 @@ let dink_on = {
 
         removedCommandName = removedCommandName.substring(0, 300);
         if (removedCommandName.trim() === "" ) {
-            removedCommandName = "nobody";
+            removedCommandName = "nothing to say";
         }
-        removedCommandName = `<speak>Get dinked on ${ removedCommandName }<break time="1s"/></speak>`;
+        removedCommandName = `<speak>${ removedCommandName }<break time="1s"/></speak>`;
 
-        const broadcast_dink = bot.createVoiceBroadcast();
         const broadcast_say = bot.createVoiceBroadcast();
-
         is_on = true;
 
         voiceChannel
@@ -81,12 +79,7 @@ let dink_on = {
 
                 polly.synthesizeSpeech(params, (err, data) => {
                     if (err) {
-                        connection.disconnect();
-                        voiceChannel.leave();
-
-                        voices.is_on = false;
-                        message.channel.send(`Sorry, ${message.author } couldn't parse your message.\n`
-                            + "Try and fix your SSML: https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html .");
+                        logger.error(err.code)
                     } else if (data) {
                         if (data.AudioStream instanceof Buffer) {
                             fs.writeFile('./sounds/voice.mp3', data.AudioStream, function (err) {
@@ -95,21 +88,15 @@ let dink_on = {
                                     return;
                                 }
 
-                                const dink_sound = fs.createReadStream("./sounds/diiink.mp3");
-                                broadcast_dink.playStream(dink_sound);
-                                connection.playBroadcast(broadcast_dink, { volume: 1.0 });
+                                const say_sound = fs.createReadStream("./sounds/voice.mp3");
+                                broadcast_say.playStream(say_sound);
+                                connection.playBroadcast(broadcast_say, { volume: 0.7  });
 
-                                broadcast_dink.once("end", () => {
-                                    const say_sound = fs.createReadStream("./sounds/voice.mp3");
-                                    broadcast_say.playStream(say_sound);
-                                    connection.playBroadcast(broadcast_say, { volume: 0.7  });
+                                broadcast_say.once("end", () => {
+                                    connection.disconnect();
+                                    voiceChannel.leave();
 
-                                    broadcast_say.once("end", () => {
-                                        connection.disconnect();
-                                        voiceChannel.leave();
-
-                                        voices.is_on = false;
-                                    });
+                                    voices.is_on = false;
                                 });
                             });
                         }

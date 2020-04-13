@@ -1,4 +1,6 @@
-const voices = {
+let is_on = false;
+
+const list = {
     'Ivy': 'US/Female',
     'Kimberly': 'US/Female',
     'Geraint': 'Welsh/Male',
@@ -11,4 +13,7 @@ const voices = {
     'Amy': 'British/Female',
 };
 
-module.exports = voices;
+module.exports = {
+    is_on,
+    list
+};

@@ -5,7 +5,7 @@ let halp = {
     alias: "h",
     desc:"gives information on commands",
     callback:function (message) {
-        let help = "Commands\n\n";
+        let help = "__Commands__\n\n";
 
         Command.all_commands.forEach(function (element) {
             if (!element.draft && element.name != null) {
@@ -13,9 +13,10 @@ let halp = {
             }
         });
 
-        help += "`Put a space before each subcommand`\n";
-
-        message.channel.send(help + "");
+        message.channel.send(help
+            + "\nBoth the `!yell` and `!dink-on` commands support "
+            + "pronunciation tags like this:```I <emphasis level=\"strong\">really like</emphasis>```"
+            + "See: <https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html>");
     }
 };
 
