@@ -1,3 +1,5 @@
+const logger = require("../util/logger");
+
 class Command {
     //name should be string,
     //desc should also be a string, but longer
@@ -38,9 +40,9 @@ module.exports = Command;
   Just in case something uncaught it thrown in a class
  */
 process.on('uncaughtException', function (exception) {
-    console.log(exception);
+    logger.error(exception);
 });
 
 process.on('unhandledRejection', function (exception) {
-    console.log(exception);
+    logger.error(exception);
 });
