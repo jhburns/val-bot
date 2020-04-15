@@ -72,6 +72,13 @@ let dink_on = {
         voiceChannel
             .join()
             .then(connection => {
+                setTimeout(() => {
+                    connection.disconnect();
+                    voiceChannel.leave();
+
+                    is_on = false;
+                }, 120000);
+
                 const params = {
                     Text: removedCommandName,
                     TextType: 'ssml',
@@ -79,6 +86,7 @@ let dink_on = {
                     VoiceId: voice,
                 };
 
+                // Fix error: InvalidSsmlException
                 polly.synthesizeSpeech(params, (err, data) => {
                     if (err) {
                         connection.disconnect();
