@@ -72,13 +72,6 @@ let dink_on = {
         voiceChannel
             .join()
             .then(connection => {
-                setTimeout(() => {
-                    connection.disconnect();
-                    voiceChannel.leave();
-
-                    is_on = false;
-                }, 120000);
-
                 const params = {
                     Text: removedCommandName,
                     TextType: 'ssml',

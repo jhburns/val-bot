@@ -70,13 +70,6 @@ let dink_on = {
         voiceChannel
             .join()
             .then(connection => {
-                setTimeout(() => {
-                    connection.disconnect();
-                    voiceChannel.leave();
-
-                    is_on = false;
-                }, 120000);
-
                 const params = {
                     Text: removedCommandName,
                     TextType: 'ssml',
@@ -102,7 +95,7 @@ let dink_on = {
 
                                 const say_sound = fs.createReadStream("./sounds/voice.mp3");
                                 broadcast_say.playStream(say_sound);
-                                connection.playBroadcast(broadcast_say, { volume: 0.7  });
+                                connection.playBroadcast(broadcast_say, { volume: 0.7 });
 
                                 broadcast_say.once("end", () => {
                                     connection.disconnect();
