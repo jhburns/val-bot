@@ -86,7 +86,12 @@ let dink_on = {
 
                 polly.synthesizeSpeech(params, (err, data) => {
                     if (err) {
-                        logger.error(err.code)
+                        connection.disconnect();
+                        voiceChannel.leave();
+
+                        voices.is_on = false;
+                        message.channel.send(`Sorry, ${message.author } couldn't parse your message.\n`
+                            + "Try and fix your SSML: https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html .");
                     } else if (data) {
                         if (data.AudioStream instanceof Buffer) {
                             fs.writeFile('./sounds/voice.mp3', data.AudioStream, function (err) {
