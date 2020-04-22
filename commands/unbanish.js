@@ -1,7 +1,7 @@
 let banished = require("../util/banished_list");
 
 function unBanishUser(message, user, name) {
-    const i = indexOf(user.id);
+    const i = banished.indexOf(user.id);
     if (i >=0) {
         banished.splice(i, 1);
         message.channel.send(`${ name } you have been unbanished.`);
