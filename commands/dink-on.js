@@ -86,7 +86,7 @@ let dink_on = {
                         voiceChannel.leave();
 
                         voices.is_on = false;
-                        message.channel.send(`Sorry, ${message.author } couldn't parse your message.\n`
+                        message.channel.send(`Sorry, ${ message.author } couldn't parse your message.\n`
                             + "Try and fix your SSML: https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html .");
                     } else if (data) {
                         if (data.AudioStream instanceof Buffer) {
