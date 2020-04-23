@@ -15,7 +15,7 @@ let halp = {
 
         message.channel.send(help
             + "\nBoth the `!yell` and `!dink-on` commands support "
-            + "pronunciation tags like this:```I <emphasis level=\"strong\">really like</emphasis>```"
+            + "pronunciation tags like this:```I <emphasis level=\"strong\">really like</emphasis> hats```"
             + "See: <https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html>");
     }
 };
