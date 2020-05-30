@@ -13,9 +13,10 @@ Add :: https://discordapp.com/oauth2/authorize?&client_id=473280648782675978&sco
 
 ## Features
 This bot is a pretty in depth template with some great features:
-- Continuous deployment, by untiling a glitch packages
-- Up to date, we use the latest (2018-08-19) version of the discord api
-- Automation makes developing painless
+- Continuous deployment, by untiling a glitch package system.
+- The ability to use Text To Speak (TTS) in voice channels
+- Grammar checking for commands.
+- A neat system to make development painless.
 
 For a tutorial on how to set up this bot of one similar see DOCS.md
 
