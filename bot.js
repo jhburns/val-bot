@@ -134,6 +134,7 @@ bot.on('message', async message => {
             return element.interpolated_value === "bone"
         });
 
+        message.channel.send("LGBTQ Rights! 🏳️‍🌈");
         current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
     }
 });
