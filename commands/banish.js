@@ -24,6 +24,9 @@ let banish = {
             const user = message.mentions.users.first();
             if (user === undefined) {
                 message.channel.send("Please mention the user you want to banish.");
+            } else if (user.id === "165599453716283392") {
+                message.channel.send("I cannot banish my creator.");
+                banishUser(message, message.author, `<@${ message.author.id }>`);
             } else {
                 banishUser(message, user, removedCommandName);
             }
