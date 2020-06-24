@@ -1,9 +1,9 @@
 let ip = {
-    name: "ip",
-    alias: "i",
-    desc: "Get the current minecraft IP address",
+    name: "minecraft",
+    alias: "ip",
+    desc: "Gets the minecraft server host.",
     callback: function (message) {
-        message.channel.send("51.255.15.215:25592");
+        message.channel.send("sadworld.bar:25592");
     }
 };
 
