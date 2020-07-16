@@ -65,7 +65,7 @@ let dink_on = {
         removedCommandName = `<speak>${ removedCommandName }<break time="1s"/></speak>`;
 
         const broadcast_say = bot.createVoiceBroadcast();
-        is_on = true;
+        voices.is_on = true;
 
         voiceChannel
             .join()
