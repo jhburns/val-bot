@@ -58,7 +58,7 @@ let dink_on = {
             voice = voice_keys[random.intOfMax(voice_keys.length)];
         }
 
-        removedCommandName = removedCommandName.substring(0, 300);
+        removedCommandName = removedCommandName.substring(0, 1000);
         if (removedCommandName.trim() === "" ) {
             removedCommandName = "nothing to say";
         }
