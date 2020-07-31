@@ -4,7 +4,7 @@ function banishUser(message, user, name) {
     message.channel.send(
         `${ name } you have been banished to the shadow realm. ` +
         "You are only allow to post in <#677686250148462631> for about the next 24-hours. " +
-        "I will delete you messages, no hesitation."
+        "I will delete your messages, no hesitation."
     );
 
     banished.push(user.id);

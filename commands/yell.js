@@ -107,7 +107,6 @@ let dink_on = {
                         }
                     }
                 });
-
             })
             .catch(err => logger.error(err));
     }
