@@ -74,6 +74,10 @@ fs.readdirSync(path.join(__dirname, "commands")).forEach(file => {
  */
 
 bot.on('message', async message => {
+    if (message.author.bot) {
+        return;
+    }
+
     let text = message.content;
 
     if (checkBanished(message)) {
