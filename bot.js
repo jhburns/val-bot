@@ -128,13 +128,11 @@ bot.on('message', async message => {
     }
 
     let body = text.toLowerCase();
-    if (body.includes("bone") && !message.author.bot) {
-        let current_cmd = Command.all_commands.find(function(element) {
-            return element.interpolated_value === "bone"
-        });
-
-        current_cmd.oncall(message, bot, { quotes_text, fighting_words_text });
-    }
+    Command.all_commands.forEach((element) => {
+        if (body.includes(element.interpolated_value)) {
+            element.oncall(message, bot, { quotes_text, fighting_words_text });
+        }
+    });
 });
 
 function checkBanished(message) {
