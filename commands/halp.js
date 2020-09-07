@@ -8,17 +8,14 @@ let halp = {
         let help = "__Commands__\n\n";
 
         Command.all_commands.forEach(function (element) {
-            const alias = element.alias == undefined ? "" : `(${element.alias}) `;
+            const alias = element.alias === undefined ? "" : `(${element.alias}) `;
 
             if (!element.draft && element.name != null) {
                 help += `**!${ element.name }** ${ alias }${ element.desc }\n`;
             }
         });
 
-        message.channel.send(help
-            + "\nBoth the `!yell` and `!dink-on` commands support "
-            + "pronunciation tags like this:```I <emphasis level=\"strong\">really like</emphasis> hats```"
-            + "See: <https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html>");
+        message.channel.send(help);
     }
 };
 
