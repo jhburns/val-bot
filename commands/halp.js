@@ -8,8 +8,10 @@ let halp = {
         let help = "__Commands__\n\n";
 
         Command.all_commands.forEach(function (element) {
+            const alias = element.alias == undefined ? "" : `(${element.alias})`;
+            
             if (!element.draft && element.name != null) {
-                help += `**!${ element.name }** (${ element.alias }) ${ element.desc }\n`;
+                help += `**!${ element.name }** ${ alias } ${ element.desc }\n`;
             }
         });
 
