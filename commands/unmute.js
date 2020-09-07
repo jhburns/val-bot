@@ -1,7 +1,7 @@
 let unmute = {
     name: "unmute-all",
     alias: "ua",
-    desc: "unmutes everyone in your voice channel",
+    desc: "unmutes everyone in your voice channel, only users with the 'among us' role can use this",
     callback: function (message, { bot }) {
         if (!message.member.roles.has('among us')) {
             message.channel.send("Sorry, you lack the 'among us' role and cannot use this command.\n" +
