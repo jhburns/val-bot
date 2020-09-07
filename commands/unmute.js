@@ -2,7 +2,6 @@ let unmute = {
     name: "unmute-all",
     alias: "ua",
     desc: "unmutes everyone in your voice channel",
-    draft: true,
     callback: function (message, { bot }) {
         let voiceChannel = message.member.voiceChannel;
         if (voiceChannel === undefined) {

@@ -2,7 +2,6 @@ let mute = {
     name: "mute-all",
     alias: "ma",
     desc: "mutes everyone in your voice channel",
-    draft: true,
     callback: function (message, { bot }) {
         let voiceChannel = message.member.voiceChannel;
         if (voiceChannel === undefined) {
