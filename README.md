@@ -36,4 +36,3 @@ info: All quotes loaded in: 3.082sec
 Use `npm run draft` to create new commands while a production instance is already running.
 Additionally, adding the args `npm run map -- 'realName->remapName'` lets you treat an existing command
 as if 'draft' is true, under a remapping name. These make it easy to run the bot in the same server as production.
-
