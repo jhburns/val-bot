@@ -2,7 +2,6 @@ let pog = {
     name: "allpog",
     alias: "a",
     desc: "posts every pog emoji",
-    draft: true,
     callback: function(message) {
         const ancient = Math.random() < 0.5 ? "<:ancientpog:725602510328561675>" : "<:ancientpog2:725822760181563466>";
 
