@@ -1,7 +1,7 @@
 let pong = {
     name: "pong",
     alias: "po",
-    desc: "test val's performance",
+    desc: "test val-bot's performance",
     callback: function (message, { bot }) {
         let start = Date.now();
 

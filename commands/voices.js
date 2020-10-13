@@ -10,7 +10,7 @@ function sortObject(obj) {
 let test = {
     name: "voices",
     alias: "v",
-    desc: "List all of the possible voice names.",
+    desc: "list all of the possible voice names for use in the '!yell' command",
     callback: function (message) {
         let content = "__Voices__\n\n";
         let sorted = sortObject(voices.list);

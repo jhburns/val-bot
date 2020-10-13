@@ -22,7 +22,7 @@ function includesNoCase(array, value) {
 let dink_on = {
     name: "yell",
     alias: "y",
-    desc: "`text to say (| voice name)` Yell given text in voice channel the you are in.",
+    desc: "`text to say (| voice name)` yell given text in voice channel the you are in, without a name specified it picks one at random",
     callback: function (message, {bot}) {
         if (voices.is_on) {
             message.channel.send("Please wait your turn, I am busy in a voice chat already.");
