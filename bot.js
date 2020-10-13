@@ -86,7 +86,7 @@ bot.on('message', async message => {
 
     if (text.substring(0, 1) === '!') {
         let args = text.substring(1).split(' ');
-        let cmd_name = args[0];
+        let cmd_name = args[0].toLocaleLowerCase();
         let is_remapped = false;
 
         if (remap !== null && cmd_name === remap[1]) {
