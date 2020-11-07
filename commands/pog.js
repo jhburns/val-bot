@@ -8,7 +8,7 @@ let pog = {
         message.channel.send(`<:dinopog:698084158387519579> <:freesmileypog:764598680941756446> ${ ancient } ` +
             "<:jellopog:743528157612605482> <:meatpog:762165676093603860> " +
             "<:grimpog:764993124355276821> <:willpog:764611841912995881> <:kog:762459118057160745>" +
-            "<:joepog:774343175900495912>");
+            "<:but_his_fracking_pog:774343175900495912>");
     }
 };
 
