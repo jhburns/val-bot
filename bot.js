@@ -78,11 +78,11 @@ bot.on('message', async message => {
         return;
     }
 
-    let text = message.content;
-
     if (checkBanished(message)) {
         return;
     }
+
+    let text = message.content;
 
     if (text.substring(0, 1) === '!') {
         let args = text.substring(1).split(' ');
