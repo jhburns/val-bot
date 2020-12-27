@@ -1,10 +1,11 @@
 const audio = require("../util/audio");
+let random = require("../util/randoms");
 
-let yell = {
-    name: "yell",
-    alias: "y",
-    desc: "`text to say (| voice name)` yell given text in your voice channel, voice name is random unless included",
-    callback: function (message, {bot}) {
+let yell_quote = {
+    name: "yell-quote",
+    alias: "yq",
+    desc: "`(voice name)` yell a random quote in your voice channel, voice name is random unless included",
+    callback: function (message, {bot, quotes_text}) {
         let spaceDelimited = message.cleanContent.replace("@", "").split(" ");
         spaceDelimited.shift();
 
@@ -12,9 +13,8 @@ let yell = {
 
         let voice = null;
         const voice_keys = Object.keys(audio.list);
-        if (removedCommandName.includes("|")) {
-            let barDelimited = removedCommandName.split("|");
-            const  trimmed = barDelimited[1].trim();
+        if (removedCommandName !== "") {
+            const  trimmed = removedCommandName.trim();
             const index = audio.includesNoCase(voice_keys, trimmed);
 
             if (index < 0) {
@@ -23,11 +23,10 @@ let yell = {
             }
 
             voice = voice_keys[index];
-            removedCommandName = barDelimited[0];
         }
 
-        audio.announce(message, bot, removedCommandName, voice);
+        audio.announce(message, bot, quotes_text[random.intOfMax(quotes_text.length)], voice);
     }
 };
 
-module.exports = yell;
+module.exports = yell_quote;

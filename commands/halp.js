@@ -5,7 +5,7 @@ let halp = {
     alias: "h",
     desc:"gives information on commands",
     callback:function (message) {
-        let help = "__Commands__\n\n";
+        let help = "__Commands__ \n **!name** (short name)\`extra options\` description \n\n";
 
         Command.all_commands.forEach(function (element) {
             const alias = element.alias === undefined ? "" : `(${element.alias}) `;
