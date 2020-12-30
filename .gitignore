@@ -1,5 +1,5 @@
 #temp sound bite shouldn't be stored
-/sounds/temptalk.mp3
+/sounds/voice.mp3
 
 #for Webstorm
 .idea
@@ -13,5 +13,4 @@ npm-debug.log
 #for the self ping
 /temp/*
 
-/data/fighting_phrases.json
 node_modules/
