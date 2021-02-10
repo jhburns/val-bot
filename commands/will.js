@@ -1,6 +1,6 @@
 let random = require("../util/randoms");
 
-const max = 25;
+const max = 35;
 
 let will = {
     name: "willzard",
