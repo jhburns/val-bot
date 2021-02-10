@@ -16,7 +16,7 @@ let will = {
             repeated = random.intOfMax(max);
         } else {
             const userCount = parseInt(parsed[0]);
-            if (!isNaN(userCount) && userCount >= 0 && userCount <= 25) {
+            if (!isNaN(userCount) && userCount >= 0 && userCount <= max) {
                 repeated = userCount;
             } else {
                 message.channel.send(`Sorry you either didn't enter a number or it wasn't in the range 0-${ max }.`);
