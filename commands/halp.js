@@ -8,7 +8,7 @@ let halp = {
         let help = "__Commands__ \nformat: **!name** (short name)\`extra options (| optinal option)\` about \n\n";
 
         Command.all_commands.forEach(function (element) {
-            const alias = element.alias === undefined ? "" : `(${element.alias}) `;
+            const alias = element.alias === undefined ? "" : `(!${element.alias}) `;
 
             if (!element.draft && element.name != null) {
                 help += `**!${ element.name }** ${ alias }${ element.desc }\n`;
