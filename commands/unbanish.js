@@ -23,7 +23,7 @@ function banishUser(message, user, name) {
 let banish = {
     name: "unbanish",
     alias: "ub",
-    desc: "`@metion_being_unbanished` unbanish a user, only admins can use this",
+    desc: "`@mention_being_banished` unbanish a user, only admins can use this",
     callback: function (message) {
         let spaceDelimited = message.content.split(" ");
         spaceDelimited.shift();
