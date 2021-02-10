@@ -6,7 +6,6 @@ let will = {
     name: "willzard",
     alias: "w",
     desc: `\`| number\` posts long willzard, number should be in range 0-${ max }`,
-    draft: true,
     callback: function(message) {
         const parsed = message.content.split(" ");
         parsed.shift();
