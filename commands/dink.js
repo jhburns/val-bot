@@ -1,7 +1,7 @@
 let dink = {
-    name: "dink",
-    alias: "d",
-    desc: "posts the best gif in the world",
+    interpolated_value: "dink",
+    name: null,
+    alias: null,
     callback: function(message) {
         message.channel.send({files: ["./img/dink.gif"]});
     }
