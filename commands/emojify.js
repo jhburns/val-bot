@@ -40,13 +40,15 @@ function splitSafe(text) {
 }
 
 function mapChars(text) {
-    return text.map(c => {
+    const mapped = text.map(c => {
        if (c.toLowerCase() in charMap) {
            return charMap[c];
        } else {
            return c;
        }
-    }).join(' ');
+    })
+
+    return mapped.join(' ').replace(/^ +/gm, '');
 }
 
 let emojify = {
