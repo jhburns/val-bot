@@ -12,14 +12,14 @@ let will = {
 
         let repeated = 0;
 
-        if (parsed.length == 0) {
+        if (parsed.length === 0) {
             repeated = random.intOfMax(max);
         } else {
             const userCount = parseInt(parsed[0]);
             if (!isNaN(userCount) && userCount >= 0 && userCount <= max) {
                 repeated = userCount;
             } else {
-                message.channel.send(`Sorry you either didn't enter a number or it wasn't in the range 0-${ max }.`);
+                message.channel.send(`Sorry, you either didn't enter a number or it wasn't in the range 0-${ max }.`);
                 return;
             }
         }
