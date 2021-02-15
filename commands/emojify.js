@@ -13,9 +13,34 @@ const charMap = {
     '!': '‼️', '?': '⁉️', ' ': '⬜',
 };
 
+function splitSafe(text) {
+    const split = Array.from(text);
+    const mergedEmojis = [];
+
+    const concatLast = () => mergedEmojis[mergedEmojis.length - 1] += split.shift();
+
+    while (split.length > 0) {
+        if (split[0] === '<' && split.length >= 2 && split[1] === ':') {
+            mergedEmojis.push(split.shift());
+            concatLast();
+
+            while (split.length > 0 && split[0] !== '>') {
+                concatLast();
+            }
+
+            if (split.length > 0) {
+                concatLast();
+            }
+        } else {
+            mergedEmojis.push(split.shift());
+        }
+    }
+
+    return mergedEmojis;
+}
 
 function mapChars(text) {
-    return [...text].map(c => {
+    return text.map(c => {
        if (c.toLowerCase() in charMap) {
            return charMap[c];
        } else {
@@ -37,7 +62,8 @@ let emojify = {
             return;
         }
 
-        const userText = parsed.join(" ").trim();
+        const userText = splitSafe(parsed.join(' ').trim());
+        console.log(userText);
 
         if (userText.length > 25) {
             message.channel.send("Sorry, please provide text less than 25 characters long.");
