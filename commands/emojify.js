@@ -15,10 +15,8 @@ const charMap = {
 
 
 function mapChars(text) {
-    const lowerCased = text.toLowerCase();
-
-    return lowerCased.split('').map(c => {
-       if (c in charMap) {
+    return [...text].map(c => {
+       if (c.toLowerCase() in charMap) {
            return charMap[c];
        } else {
            return c;
