@@ -11,7 +11,7 @@ let halp = {
             const alias = element.alias === undefined ? "" : `(!${element.alias}) `;
 
             if (!element.draft && element.name != null) {
-                help += `**!${ element.name }** ${ alias }${ element.desc }\n`;
+                help += `**!${ element.name }** ${ alias }${ element.desc }.\n`;
             }
         });
 
