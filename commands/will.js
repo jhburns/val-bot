@@ -1,11 +1,12 @@
 let random = require("../util/randoms");
 
-const max = 100;
+const max = 80;
 
 let will = {
     name: "willzard",
     alias: "w",
     desc: `\`( number)\` posts long willzard, optional number should be in range 0-${ max }`,
+    draft: true,
     callback: function(message) {
         const parsed = message.content.split(" ");
         parsed.shift();
@@ -24,9 +25,9 @@ let will = {
             }
         }
 
-        message.channel.send("<:willzard1:808952341721645056>" +
-            `${ "<:willzard2:808952358205128724>".repeat(repeated) }` +
-            "<:willzard3:808952372075298848>");
+        message.channel.send("<:_:808952341721645056>" +
+            `${ "<:_:808952358205128724>".repeat(repeated) }` +
+            "<:_:808952372075298848>");
     }
 };
 
