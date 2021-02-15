@@ -29,7 +29,7 @@ function mapChars(text) {
 let emojify = {
     name: "emojify",
     alias: "e",
-    desc: `\`your text\`converts into emojis, max text length ${max} characters.`,
+    desc: `\`your text\` converts into emojis, max text length ${max} characters.`,
     callback: function (message) {
         const parsed = message.content.split(" ");
         parsed.shift();
