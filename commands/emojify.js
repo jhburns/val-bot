@@ -23,7 +23,7 @@ function mapChars(text) {
        } else {
            return c;
        }
-    }).join('');
+    }).join(' ');
 }
 
 let emojify = {
