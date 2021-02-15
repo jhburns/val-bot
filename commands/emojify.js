@@ -63,7 +63,6 @@ let emojify = {
         }
 
         const userText = splitSafe(parsed.join(' ').trim());
-        console.log(userText);
 
         if (userText.length > 25) {
             message.channel.send("Sorry, please provide text less than 25 characters long.");
