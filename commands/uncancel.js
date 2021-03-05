@@ -1,19 +1,29 @@
 let banished = require("../util/banished_list");
 
+function unBanishUser(message, user, name) {
+    const i = banished.indexOf(user.id);
+    if (i >=0) {
+        banished.splice(i, 1);
+        message.channel.send(`${ name } you have been uncanceled.`);
+    } else {
+        message.channel.send("User isn't cancelled right now.");
+    }
+}
+
 function banishUser(message, user, name) {
     message.channel.send(
-        `${ name } you have been banished to the shadow realm. ` +
+        `${ name } you have been cancelled to the shadow realm. ` +
         "You are only allow to post in <#677686250148462631> for about the next 24-hours. " +
-        "I will delete your messages, no hesitation."
+        "I will delete you messages, no hesitation."
     );
 
     banished.push(user.id);
 }
 
 let banish = {
-    name: "banish",
-    alias: "b",
-    desc: "`@mention_being_banished` banish a user, only admins can use this",
+    name: "uncancel",
+    alias: "uc",
+    desc: "`@mention_being_uncancelled` uncancel a user, only admins can use this",
     callback: function (message) {
         let spaceDelimited = message.content.split(" ");
         spaceDelimited.shift();
@@ -23,12 +33,9 @@ let banish = {
         if (message.member.hasPermission("ADMINISTRATOR", true, true)) {
             const user = message.mentions.users.first();
             if (user === undefined) {
-                message.channel.send("Please mention the user you want to banish.");
-            } else if (user.id === "165599453716283392") {
-                message.channel.send("I cannot banish my creator.");
-                banishUser(message, message.author, `<@${ message.author.id }>`);
+                message.channel.send("Please mention the user you want to uncancel.");
             } else {
-                banishUser(message, user, removedCommandName);
+                unBanishUser(message, user, removedCommandName);
             }
         } else {
             message.channel.send("You really thought you could do that?");
