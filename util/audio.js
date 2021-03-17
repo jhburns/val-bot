@@ -2,8 +2,10 @@ const aws = require('aws-sdk');
 const fs = require("fs");
 const random = require("../util/randoms");
 const logger = require("../util/logger");
+const uuid = require("uuid");
 
 let is_on = false;
+let connectionId = "";
 
 const list = {
     'Ivy': 'US/Female',
@@ -33,6 +35,13 @@ function includesNoCase(array, value) {
     return -1;
 }
 
+function cleanup(connection, voiceChannel) {
+    connection.disconnect();
+    voiceChannel.leave();
+
+    is_on = false;
+}
+
 function announce(message, bot, content, optional_voice) {
     if (is_on) {
         message.channel.send("Please wait your turn, I am busy in a voice chat already.");
@@ -44,6 +53,9 @@ function announce(message, bot, content, optional_voice) {
         message.channel.send("Please join a voice channel to use this command.");
         return;
     }
+
+    const currentId = uuid.v4();
+    connectionId = currentId;
 
     const voice_keys = Object.keys(list);
     let voice = optional_voice == null ? voice_keys[random.intOfMax(voice_keys.length)] : optional_voice;
@@ -70,11 +82,9 @@ function announce(message, bot, content, optional_voice) {
 
             polly.synthesizeSpeech(params, (err, data) => {
                 if (err) {
-                    console.log(err);
-                    connection.disconnect();
-                    voiceChannel.leave();
+                    logger.error(err);
+                    cleanup(connection, voiceChannel);
 
-                    is_on = false;
                     message.channel.send(`Sorry, ${message.author } couldn't parse understand you message.\n`
                         + "Try removing '<', '>', or other special characters.");
                 } else if (data) {
@@ -82,27 +92,23 @@ function announce(message, bot, content, optional_voice) {
                         fs.writeFile('./sounds/voice.mp3', data.AudioStream, function (err) {
                             if (err) {
                                 logger.error(err);
+                                cleanup(connection, voiceChannel);
                                 return;
                             }
 
-                            const say_sound = fs.createReadStream("./sounds/voice.mp3");
-                            broadcast_say.playStream(say_sound);
                             connection.playBroadcast(broadcast_say, { volume: 0.7 });
 
+                            broadcast_say.playFile("./sounds/voice.mp3");
                             broadcast_say.once("end", () => {
-                                connection.disconnect();
-                                voiceChannel.leave();
-
-                                is_on = false;
+                                cleanup(connection, voiceChannel);
                             });
                         });
                     }
 
                     setTimeout(function () {
-                        is_on = false;
-
-                        connection.disconnect();
-                        voiceChannel.leave();
+                        if (is_on && connectionId === currentId) {
+                            cleanup(connection, voiceChannel);
+                        }
                     }, 45000);
                 }
             });
