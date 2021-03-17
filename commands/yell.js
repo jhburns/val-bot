@@ -1,10 +1,9 @@
 const audio = require("../util/audio");
 
 let yell = {
-    name: "yell2",
+    name: "yell",
     alias: "y",
     desc: "`text to say (| voice name)` yell given text in your voice channel, voice name is random unless given",
-    draft: true,
     callback: function (message, {bot}) {
         let spaceDelimited = message.cleanContent.replace("@", "").split(" ");
         spaceDelimited.shift();
