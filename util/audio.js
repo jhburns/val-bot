@@ -96,12 +96,12 @@ function announce(message, bot, content, optional_voice) {
                                 return;
                             }
 
-                            connection.playBroadcast(broadcast_say, { volume: 0.7 });
-
                             broadcast_say.playFile("./sounds/voice.mp3");
                             broadcast_say.once("end", () => {
                                 cleanup(connection, voiceChannel);
                             });
+
+                            connection.playBroadcast(broadcast_say, { volume: 0.7, bitrate: 'auto' });
                         });
                     }
 
