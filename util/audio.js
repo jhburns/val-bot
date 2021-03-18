@@ -65,7 +65,7 @@ function announce(message, bot, content, optional_voice) {
         content = "nothing to say";
     }
 
-    content = `<speak>${ content }<break time="2s"/></speak>`;
+    content = `<speak>${ content }</speak>`;
 
     const broadcast_say = bot.createVoiceBroadcast();
     is_on = true;
@@ -101,7 +101,7 @@ function announce(message, bot, content, optional_voice) {
                                 cleanup(connection, voiceChannel);
                             });
 
-                            connection.playBroadcast(broadcast_say, { volume: 0.7, bitrate: 24000 });
+                            connection.playBroadcast(broadcast_say, { volume: 0.7, bitrate: 12000 });
                         });
                     }
 
