@@ -65,7 +65,7 @@ function announce(message, bot, content, optional_voice) {
         content = "nothing to say";
     }
 
-    content = `<speak>${ content }</speak>`;
+    content = `<speak>${ content }<break time="1.5s"/></speak>`;
 
     const broadcast_say = bot.createVoiceBroadcast();
     is_on = true;
