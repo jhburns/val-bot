@@ -101,7 +101,7 @@ function announce(message, bot, content, optional_voice) {
                                 cleanup(connection, voiceChannel);
                             });
 
-                            connection.playBroadcast(broadcast_say, { volume: 0.7, bitrate: 'auto' });
+                            connection.playBroadcast(broadcast_say, { volume: 0.7, bitrate: 24000 });
                         });
                     }
 
