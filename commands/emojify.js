@@ -41,9 +41,10 @@ function splitSafe(text) {
 
 function mapChars(text) {
     const mapped = text.map(c => {
-       if (c.toLowerCase() in charMap) {
-           return charMap[c];
-       } else {
+        const cLower = c.toLowerCase();
+        if (cLower in charMap) {
+           return charMap[cLower];
+        } else {
            return c;
        }
     })
@@ -58,6 +59,8 @@ let emojify = {
     callback: function (message) {
         const parsed = message.content.split(" ");
         parsed.shift();
+
+        console.log(parsed.toString());
 
         if (parsed.length === 0) {
             message.channel.send("Sorry, please provide some text after the command.");
