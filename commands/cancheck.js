@@ -3,7 +3,7 @@ let banished = require("../util/banished_list");
 let cancheck = {
     name: "cancheck",
     alias: "cc",
-    desc: "Check who is currently cancelled.",
+    desc: "Check who is currently cancelled",
     draft: true,
     callback: function (message) {
         let cancelled = banished.map((u) => `<@${u}>`).join(", ");
